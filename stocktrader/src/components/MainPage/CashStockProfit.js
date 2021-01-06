@@ -5,9 +5,6 @@ import './CashStockProfit.css';
 export default function CashStockProfit(props) {
     return(
         <div>
-            <div className="table-title">
-                <h3>Portfolioperformance</h3>
-            </div>
             <table className="table-fill">
                 <tbody className="table-hover">
                     <tr>

@@ -14,7 +14,8 @@ export default function PieChart(props) {
         },
         labels: ['Stock', 'Cash'],
         dataLabels: {
-            enabled: true
+            enabled: true,
+            color: "white",
         },
         responsive: [{
             breakpoint: '50%',
@@ -29,8 +30,9 @@ export default function PieChart(props) {
         }],
         legend: {
             position: 'right',
-            offsetY: 0,
+            offsetY: 50,
             height: 230,
+            
         }
     }}
     ); 
@@ -40,10 +42,8 @@ export default function PieChart(props) {
   <div>
     <div className="chart-wrap">
       <div id="chart" className="container">
-      <div className="table-title">
-                <h3>Portfolioperformance</h3>
-            </div>
-        <Chart options={State? State.options : {}} series={State? State.series : []} type="donut" width={"75%"} />
+      
+        <Chart options={State? State.options : {}} series={State? State.series : []} type="donut" width={"95%"} />
       </div>
     </div>
   </div>
