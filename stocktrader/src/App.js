@@ -3,6 +3,8 @@ import React, {useEffect} from 'react'
 import {Helmet} from 'react-helmet';
 import {Feather} from 'feather-icons';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import Mainpage from './components/MainPage/Mainpage';
 
 function App() {
   useEffect(() => {
@@ -120,7 +122,11 @@ function App() {
               </button>
             </div>
           </div>
-
+          <Router>
+            <div className="my-4 w-100" width="900" height="380">
+              <Route exact path="/" component={Mainpage} />
+            </div>
+          </Router>
           {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
 
           

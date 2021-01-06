@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MainpageAccountProvider } from './Dataproviders/AccountProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainpageAccountProvider>
+      <App />
+    </MainpageAccountProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
