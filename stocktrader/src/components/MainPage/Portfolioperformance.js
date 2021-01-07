@@ -6,18 +6,18 @@ export default function Portfolioperformance(props) {
     return(
         <div>
             <table className="table-fill">
-<tbody className="table-hover">
-<tr>
-<td className="text-left">Portfolio value:</td>
-<td className="text-left">{`$ ${props.Performance.portfolioTotalValue}`}</td>
-</tr>
-<tr>
-<td className="text-left">Stock value:</td>
-<td className="text-left">{`$ ${props.Performance.portfolioTotalStockValue}`}</td>
-</tr>
-</tbody>
-</table>
-</div>
+                <tbody className="table-hover">
+                    <tr>
+                        <td className="text-left">Portfolio value:</td>
+                        <td className="text-left">{`$ ${props.Performance.portfolioTotalValue}`}</td>
+                    </tr>
+                    <tr>
+                        <td className="text-left">Stock value:</td>
+                        <td className="text-left">{`$ ${props.Performance.portfolioTotalStockValue}`}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
       )
 }
