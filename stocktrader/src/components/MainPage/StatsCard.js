@@ -1,10 +1,9 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
 import '../MainPage/StatsCard.css';
 import {Helmet} from 'react-helmet';
 
 
-export default function StatsCard() {
+export default function StatsCard(props) {
     return (
       <div>
         <Helmet>
@@ -15,78 +14,25 @@ export default function StatsCard() {
           {/*<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"></link>/*}
           {/*<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"></link>*/}
           <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"></link>
-        </Helmet>
-        <div className="row">
-        <div className="col-xl-3 col-sm-6 col-12"> 
-          <div className="card">
-            <div className="card-content">
-              <div className="card-body">
-                <div className="media d-flex">
-                  <div className="align-self-center">
-                    <i className="icon-pencil primary font-large-2 float-left"></i>
-                  </div>
-                  <div className="media-body text-right">
-                    <h3>278</h3>
-                    <span>New Posts</span>
-                  </div>
+        </Helmet>       
+        
+        <div className="card shell bg-gradient-dark">
+          <div className="card-content">
+            <div className="card-body py-0">
+              <div className="media d-flex align-items-center mx-2">
+                <div className="align-self-center">
+                  {/*<i className="icon-speech warning font-large-2 float-left"></i>*/}
+                  <i className= {`${props.icon}`}></i>
+                </div>
+                <div className="media-body text-right">
+                  <h2>{props.amount}</h2> 
+                  <span>{props.label}</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-xl-3 col-sm-6 col-12">
-          <div className="card">
-            <div className="card-content">
-              <div className="card-body">
-                <div className="media d-flex">
-                  <div className="align-self-center">
-                    {/*<i className="icon-speech warning font-large-2 float-left"></i>*/}
-                    <i className="las la-money-bill-wave primary font-large-2 float-left"></i>
-                  </div>
-                  <div className="media-body text-right">
-                    <h3>156</h3>
-                    <span>New Comments</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-        <div className="col-xl-3 col-sm-6 col-12">
-          <div className="card">
-            <div className="card-content">
-              <div className="card-body">
-                <div className="media d-flex"> 
-                  <div className="align-self-center">
-                    <i className="icon-graph success font-large-2 float-left"></i>
-                  </div>
-                  <div className="media-body text-right">
-                    <h3>64.89 %</h3>
-                    <span>Bounce Rate</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-3 col-sm-6 col-12">
-          <div className="card">
-            <div className="card-content">
-              <div className="card-body">
-                <div className="media d-flex">
-                  <div className="align-self-center">
-                    <i className="icon-pointer danger font-large-2 float-left"></i>
-                  </div>
-                  <div className="media-body text-right">
-                    <h3>423</h3>
-                    <span>Total Visits</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-    );
-    }
+      
+    )
+}

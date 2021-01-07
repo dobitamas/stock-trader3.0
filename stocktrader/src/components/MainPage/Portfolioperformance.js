@@ -1,22 +1,21 @@
 import React from 'react';
 import './Portfolioperformance.css';
+import StatsCard from './StatsCard';
 
 
 export default function Portfolioperformance(props) {
     return(
-        <div>
-            <table className="table-fill">
-                <tbody className="table-hover">
-                    <tr>
-                        <td className="text-left">Portfolio value:</td>
-                        <td className="text-left">{`$ ${props.Performance.portfolioTotalValue}`}</td>
-                    </tr>
-                    <tr>
-                        <td className="text-left">Stock value:</td>
-                        <td className="text-left">{`$ ${props.Performance.portfolioTotalStockValue}`}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div className="col">
+            <div class="shadow card mb-3 ">
+                <div class="card-header">Portfolio value</div>
+                <div class="card-body">
+                    <StatsCard
+                        label={"Total Cash"}
+                        amount={"123 456 $"}
+                        icon={"las la-money-bill-wave font-large-3 float-left"}
+                    />
+                </div>
+            </div>
         </div>
 
       )

@@ -2,7 +2,8 @@ import './App.css';
 import React, {useEffect} from 'react'
 import {Helmet} from 'react-helmet';
 import {Feather} from 'feather-icons';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+/*import '../node_modules/bootstrap/dist/css/bootstrap.css';*/
+import '../src/scss/custom.scss';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Mainpage from './components/MainPage/Mainpage';
 import StatsCard from './components/MainPage/StatsCard';

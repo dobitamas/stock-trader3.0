@@ -20,14 +20,7 @@ export default function Mainpage(){
                             </div>
                     </div>    
                 </div>
-                <div className="col">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">Portfolio value</div>
-                            <div class="card-body">
-                                <Portfolioperformance Performance={AccData.portfolioPerformance} />
-                            </div>
-                    </div>
-                </div>
+                <Portfolioperformance Performance={AccData.portfolioPerformance} />                
             </div>
             <div className="row">
                 <div className="col">
