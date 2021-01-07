@@ -42,7 +42,6 @@ export default function PieChart(props) {
   <div>
     <div className="chart-wrap">
       <div id="chart" className="container">
-      
         <Chart options={State? State.options : {}} series={State? State.series : []} type="donut" width={"95%"} />
       </div>
     </div>
