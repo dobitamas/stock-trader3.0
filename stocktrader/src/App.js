@@ -23,7 +23,7 @@ function App() {
             <meta name="author" content="" />
             </Helmet>
         <nav className="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow">
-      <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Company name</a>
+      <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Stock Trader</a>
       <input className="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search"/>
       <ul className="navbar-nav px-3">
         <li className="nav-item text-nowrap">
@@ -40,7 +40,7 @@ function App() {
               <li className="nav-item">
                 <a className="nav-link active" href="#">
                   <span data-feather="home"></span>
-                  Dashboard <span className="sr-only">(current)</span>
+                  Mainpage <span className="sr-only">(current)</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -127,7 +127,6 @@ function App() {
           <Router>
             <div className="my-4 w-100" width="900" height="380">
               <Route exact path="/" component={Mainpage} />
-              <Route exaxt path="/testcard" component={StatsCard} />
             </div>
           </Router>
           {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}

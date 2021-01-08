@@ -16,7 +16,7 @@ export default function StatsCard(props) {
           <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"></link>
         </Helmet>       
         
-        <div className="card shell bg-gradient-dark">
+        <div className="card shell bg-gradient-info">
           <div className="card-content">
             <div className="card-body py-0">
               <div className="media d-flex align-items-center mx-2">
@@ -26,7 +26,7 @@ export default function StatsCard(props) {
                 </div>
                 <div className="media-body text-right">
                   <h2>{props.amount}</h2> 
-                  <span>{props.label}</span>
+                  <h4>{props.label}</h4>
                 </div>
               </div>
             </div>

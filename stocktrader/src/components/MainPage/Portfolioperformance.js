@@ -10,9 +10,13 @@ export default function Portfolioperformance(props) {
                 <div class="card-header">Portfolio value</div>
                 <div class="card-body">
                     <StatsCard
-                        label={"Total Cash"}
-                        amount={"123 456 $"}
+                        label={"Total value"}
+                        amount={`$ ${props.Performance.portfolioTotalValue}`}
                         icon={"las la-money-bill-wave font-large-3 float-left"}
+                    /><StatsCard
+                        label={"Total stock value"}
+                        amount={`$ ${props.Performance.portfolioTotalStockValue}`}
+                        icon={"las la-chart-line font-large-3 float-left"}
                     />
                 </div>
             </div>
