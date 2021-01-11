@@ -6,7 +6,7 @@ import {Feather} from 'feather-icons';
 import '../src/scss/custom.scss';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Mainpage from './components/MainPage/Mainpage';
-import StatsCard from './components/MainPage/StatsCard';
+import Detailedstockpage from './components/DetailedStockPage/Detailedstockpage';
 
 function App() {
   useEffect(() => {
@@ -127,6 +127,7 @@ function App() {
           <Router>
             <div className="my-4 w-100" width="900" height="380">
               <Route exact path="/" component={Mainpage} />
+              <Route exact path="/stockpage" component={Detailedstockpage} />
             </div>
           </Router>
           {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
