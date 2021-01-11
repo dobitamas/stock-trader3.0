@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 
 export default function Chart(props){
-    const [SelectedStock, setSelectedStock] = useState("AAPL");
+    const [SelectedStock, setSelectedStock] = useState(props.symbol);
     const [StockData, setStockData] = useState([]);
 
 
@@ -64,15 +64,15 @@ export default function Chart(props){
 
     useEffect(() => {
         const axios = require('axios');
-        axios.get('http://localhost:8080/stock/getcandle/AAPL/5')
+        axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
           .then(function(resp) {
             setStockData(resp.data.reactCandleDataList)
           })
     }, [])
 
     return(
-        <div className="container">
-            <ReactApexChart options={options} series={series} type="candlestick" height={350} />
+        <div className="profile-card js-profile-card">
+            <ReactApexChart options={options} series={series} type="candlestick" height={500} />
         </div>
     )
 

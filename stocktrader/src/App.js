@@ -126,8 +126,12 @@ function App() {
           </div>
           <Router>
             <div className="my-4 w-100" width="900" height="380">
-              <Route exact path="/" component={Mainpage} />
-              <Route exact path="/stockpage" component={Detailedstockpage} />
+              <Route exact path="/">
+                <Mainpage />
+              </Route>
+              <Route exact path="/stockpage">
+                <Detailedstockpage symbol={"AAPL"} />
+              </Route>
             </div>
           </Router>
           {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}

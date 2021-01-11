@@ -1,6 +1,7 @@
 import React,{useEffect, useState, useContext} from 'react';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import Chart from './Chart';
+import Stockcard from './Stockcard';
 
 
 export default function Detailedstockpage(props){
@@ -9,22 +10,16 @@ export default function Detailedstockpage(props){
 
     /* butt2qv48v6skju2d1tg finnhub token */
 
-    useEffect(() => {
-        const axios = require('axios');
-        axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${props.symbol}&token=butt2qv48v6skju2d1tg`)
-            .then(function(resp) {
-                setStockData(resp.data);
-            })
-    }, [])
+    
 
     return(
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Chart />
+                    <Chart symbol={props.symbol} />
                 </div>
                 <div className="col">
-                    {/* */}
+                    <Stockcard symbol={props.symbol} />
                 </div>
             </div>
         </div>
