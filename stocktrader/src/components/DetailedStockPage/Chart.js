@@ -75,5 +75,4 @@ export default function Chart(props){
             <ReactApexChart options={options} series={series} type="candlestick" height={700} width={"100%"} />
         </div>
     )
-
 }
