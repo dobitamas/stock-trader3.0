@@ -4,13 +4,19 @@ import axios from "axios";
 
 export default function Stockcard(props){
     const [StockData,setStockData] = useState({});
-    const [DataIsSet, setDataIsSet] = useState(false);
+    const [QuoteData, setQuoteData] = useState({});
 
     useEffect(() => {
         axios
             .get(`https://finnhub.io/api/v1/stock/profile2?symbol=${props.symbol}&token=butt2qv48v6skju2d1tg`)
             .then((resp) =>{
                 setStockData(resp.data);
+            })
+
+        axios
+            .get(`http://localhost:8080/stock/getquote/${props.symbol}`)
+            .then((resp) =>{
+                setQuoteData(resp.data);
             })
     }, [])
 
@@ -167,11 +173,36 @@ export default function Stockcard(props){
               </div>
               <div className="profile-card-inf">
                 <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{QuoteData.currentPrice}</div>
+                  <div className="profile-card-inf__txt"><strong>Current price</strong></div>
+                </div>
+              </div>
+              <div className="profile-card-inf">
+                <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{`$ ${QuoteData.openPrice}`}</div>
+                  <div className="profile-card-inf__txt">Open price</div>
+                </div>
+                <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{`$ ${QuoteData.highPrice}`}</div>
+                  <div className="profile-card-inf__txt">High price</div>
+                </div>
+                <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{`$ ${QuoteData.lowPrice}`}</div>
+                  <div className="profile-card-inf__txt">Low price</div>
+                </div>
+                <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{`$ ${QuoteData.previousClosePrice}`}</div>
+                  <div className="profile-card-inf__txt">Close price</div>
+                </div>
+              </div>
+                
+              <div className="profile-card-inf">
+                <div className="profile-card-inf__item">
                   <div className="profile-card-inf__title">{StockData.currency}</div>
                   <div className="profile-card-inf__txt">Currency</div>
                 </div>
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{StockData.marketCapitalization}</div>
+                  <div className="profile-card-inf__title">{`$ ${StockData.marketCapitalization}`}</div>
                   <div className="profile-card-inf__txt">Capitalization</div>
                 </div>
                 <div className="profile-card-inf__item">
@@ -181,10 +212,8 @@ export default function Stockcard(props){
                 <div className="profile-card-inf__item">
                   <div className="profile-card-inf__title">{StockData.ipo}</div>
                   <div className="profile-card-inf__txt">IPO</div>
-                </div>
               </div>
-              
-
+            </div>
               <div className="profile-card-ctr">
                 <button className="profile-card__button button--blue js-message-btn">Buy</button>
                 <button className="profile-card__button button--orange">Sell</button>

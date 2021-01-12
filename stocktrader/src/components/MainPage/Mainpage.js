@@ -10,7 +10,7 @@ export default function Mainpage(){
     const [AccData, setAccData] = useContext(MainpageAccountContext);
 
     return(
-        <div className="container">
+        <div className="container-fluid,">
             <div className="row">
                 <div className="col">
                     <div class="card text-white bg-primary mb-3">
@@ -30,7 +30,6 @@ export default function Mainpage(){
                             <CashStockProfit Performance={AccData.portfolioPerformance} />
                             </div>
                     </div>
-                        
                 </div>
                 <div className="col">
                     {/*<Profit />*/}
