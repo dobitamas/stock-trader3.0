@@ -24,7 +24,7 @@ export default function Detailedstockpage(props){
                 </div>
             </div>
             <div className="row">
-                <div className="col">
+                <div className="col mt-5">
                     <Offers />
                 </div>
             </div>

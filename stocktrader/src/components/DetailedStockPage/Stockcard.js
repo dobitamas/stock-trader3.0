@@ -173,7 +173,7 @@ export default function Stockcard(props){
               </div>
               <div className="profile-card-inf">
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{QuoteData.currentPrice}</div>
+                  <div className="profile-card-inf__title">{`$ ${QuoteData.currentPrice}`}</div>
                   <div className="profile-card-inf__txt"><strong>Current price</strong></div>
                 </div>
               </div>

@@ -72,7 +72,7 @@ export default function Chart(props){
 
     return(
         <div className="profile-card js-profile-card">
-            <ReactApexChart options={options} series={series} type="candlestick" height={500} width={"100%"} />
+            <ReactApexChart options={options} series={series} type="candlestick" height={700} width={"100%"} />
         </div>
     )
 

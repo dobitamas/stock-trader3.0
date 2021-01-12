@@ -1,202 +1,65 @@
 import React, {useState, useEffect} from 'react';
+import axios from "axios";
+import './Offers.css';
 
+export default function OfferTable(props){
+    const [Offers, setOffers] = useState([]);
+    
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/user/getuseraccount`)
+            .then((resp) =>{
+                setOffers(resp.data.offers);
+            })
+    }, [])
 
-export default function Offers(props){
-    return(<div>
-        <h3 className="title-5 m-b-35">data table</h3>
-        <div className="table-data__tool">
-          <div className="table-data__tool-left">
-            <div className="rs-select2--light rs-select2--md">
-              <select className="js-select2" name="property">
-                <option selected="selected">All Properties</option>
-                <option value>Option 1</option>
-                <option value>Option 2</option>
-              </select>
-              <div className="dropDownSelect2" />
-            </div>
-            <div className="rs-select2--light rs-select2--sm">
-              <select className="js-select2" name="time">
-                <option selected="selected">Today</option>
-                <option value>3 Days</option>
-                <option value>1 Week</option>
-              </select>
-              <div className="dropDownSelect2" />
-            </div>
-            <button className="au-btn-filter">
-              <i className="zmdi zmdi-filter-list" />filters</button>
-          </div>
-          <div className="table-data__tool-right">
-            <button className="au-btn au-btn-icon au-btn--green au-btn--small">
-              <i className="zmdi zmdi-plus" />add item</button>
-            <div className="rs-select2--dark rs-select2--sm rs-select2--dark2">
-              <select className="js-select2" name="type">
-                <option selected="selected">Export</option>
-                <option value>Option 1</option>
-                <option value>Option 2</option>
-              </select>
-              <div className="dropDownSelect2" />
-            </div>
-          </div>
-        </div>
+    return(
+    <div>
         <div className="table-responsive table-responsive-data2">
           <table className="table table-data2">
             <thead>
               <tr>
-                <th>
-                  <label className="au-checkbox">
-                    <input type="checkbox" />
-                    <span className="au-checkmark" />
-                  </label>
-                </th>
-                <th>name</th>
-                <th>email</th>
-                <th>description</th>
-                <th>date</th>
-                <th>status</th>
-                <th>price</th>
-                <th />
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total value</th>
+                <th>Offer type</th>
+                <th>Offer date</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr className="tr-shadow">
-                <td>
-                  <label className="au-checkbox">
-                    <input type="checkbox" />
-                    <span className="au-checkmark" />
-                  </label>
-                </td>
-                <td>Lori Lynch</td>
-                <td>
-                  <span className="block-email">lori@example.com</span>
-                </td>
-                <td className="desc">Samsung S8 Black</td>
-                <td>2018-09-27 02:12</td>
-                <td>
-                  <span className="status--process">Processed</span>
-                </td>
-                <td>$679.00</td>
-                <td>
-                  <div className="table-data-feature">
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Send">
-                      <i className="zmdi zmdi-mail-send" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                      <i className="zmdi zmdi-edit" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                      <i className="zmdi zmdi-delete" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="More">
-                      <i className="zmdi zmdi-more" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className="spacer" />
-              <tr className="tr-shadow">
-                <td>
-                  <label className="au-checkbox">
-                    <input type="checkbox" />
-                    <span className="au-checkmark" />
-                  </label>
-                </td>
-                <td>Lori Lynch</td>
-                <td>
-                  <span className="block-email">john@example.com</span>
-                </td>
-                <td className="desc">iPhone X 64Gb Grey</td>
-                <td>2018-09-29 05:57</td>
-                <td>
-                  <span className="status--process">Processed</span>
-                </td>
-                <td>$999.00</td>
-                <td>
-                  <div className="table-data-feature">
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Send">
-                      <i className="zmdi zmdi-mail-send" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                      <i className="zmdi zmdi-edit" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                      <i className="zmdi zmdi-delete" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="More">
-                      <i className="zmdi zmdi-more" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className="spacer" />
-              <tr className="tr-shadow">
-                <td>
-                  <label className="au-checkbox">
-                    <input type="checkbox" />
-                    <span className="au-checkmark" />
-                  </label>
-                </td>
-                <td>Lori Lynch</td>
-                <td>
-                  <span className="block-email">lyn@example.com</span>
-                </td>
-                <td className="desc">iPhone X 256Gb Black</td>
-                <td>2018-09-25 19:03</td>
-                <td>
-                  <span className="status--denied">Denied</span>
-                </td>
-                <td>$1199.00</td>
-                <td>
-                  <div className="table-data-feature">
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Send">
-                      <i className="zmdi zmdi-mail-send" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                      <i className="zmdi zmdi-edit" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                      <i className="zmdi zmdi-delete" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="More">
-                      <i className="zmdi zmdi-more" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className="spacer" />
-              <tr className="tr-shadow">
-                <td>
-                  <label className="au-checkbox">
-                    <input type="checkbox" />
-                    <span className="au-checkmark" />
-                  </label>
-                </td>
-                <td>Lori Lynch</td>
-                <td>
-                  <span className="block-email">doe@example.com</span>
-                </td>
-                <td className="desc">Camera C430W 4k</td>
-                <td>2018-09-24 19:10</td>
-                <td>
-                  <span className="status--process">Processed</span>
-                </td>
-                <td>$699.00</td>
-                <td>
-                  <div className="table-data-feature">
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Send">
-                      <i className="zmdi zmdi-mail-send" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                      <i className="zmdi zmdi-edit" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                      <i className="zmdi zmdi-delete" />
-                    </button>
-                    <button className="item" data-toggle="tooltip" data-placement="top" title="More">
-                      <i className="zmdi zmdi-more" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
+                {Offers.map(function(object) {
+                    return(
+                        <React.Fragment>
+                            <tr className="tr-shadow">
+                                <td>{object.id}</td>
+                                <td>
+                                    <span className="block-email">{object.stock.name}</span>
+                                </td>
+                                <td className="desc">{object.price}</td>
+                                <td>{object.quantity}</td>
+                                <td>
+                                    <span className="status--process">{`$ ${object.totalValue}`}</span>
+                                </td>
+                                <td>{object.offerType}</td>
+                                <td>{object.offerDate}</td>
+                                <td>
+                                    <div className="table-data-feature">
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i className="las la-edit" />
+                                        </button>
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <i className="la la-trash" />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr className="spacer"></tr>
+                        </React.Fragment>)
+                })}
+                
             </tbody>
           </table>
         </div>
