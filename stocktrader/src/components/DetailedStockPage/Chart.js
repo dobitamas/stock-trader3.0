@@ -27,7 +27,7 @@ export default function Chart(props){
           xaxis: [
             {
               x: 'Oct 06 14:00',
-              borderColor: '#00E396',
+              borderColor: '#0e71c8',
               label: { 
                 borderColor: '#00E396',
                 style: {
