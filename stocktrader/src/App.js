@@ -43,9 +43,9 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" >
-                  <span data-feather="file"></span>
-                  Orders
+                <a className="nav-link" href="/stockpage" >
+                  <span data-feather="file" ></span>
+                  Stockpage
                 </a>
               </li>
               <li className="nav-item">

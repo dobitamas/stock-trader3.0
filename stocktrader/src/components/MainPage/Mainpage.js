@@ -4,6 +4,7 @@ import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import Portfolioperformance from './Portfolioperformance';
 import CashStockProfit from './CashStockProfit';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import StocksTable from './StocksTable';
 
 
 export default function Mainpage(){
@@ -33,6 +34,16 @@ export default function Mainpage(){
                 </div>
                 <div className="col">
                     {/*<Profit />*/}
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">Portfolio balance</div>
+                            <div class="card-body">
+                                <StocksTable />
+                            </div>
+                    </div>   
                 </div>
             </div>
         </div>
