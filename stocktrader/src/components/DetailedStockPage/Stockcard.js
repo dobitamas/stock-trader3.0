@@ -6,6 +6,7 @@ import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 export default function Stockcard(props){
     const [StockData,setStockData] = useState({});
     const [QuoteData, setQuoteData] = useState({});
+    const [StockAmount, setStockAmount] = useState(0);
     const [AccData] = useContext(MainpageAccountContext);
     
     useEffect(() => {
@@ -20,6 +21,8 @@ export default function Stockcard(props){
             .then((resp) =>{
                 setQuoteData(resp.data);
             })
+
+        GetStockAmount();
     }, [props.symbol])
 
     function GetStockAmount(){
@@ -27,10 +30,9 @@ export default function Stockcard(props){
       AccData.stockPerformanceList.map((obj) => {
         if(obj.stock.symbol === props.symbol){
           console.log(obj.stockTotalAmount);
-          return(obj.stockTotalAmount);
+          setStockAmount(obj.stockTotalAmount);
         }
       })
-      return(0);
     }
 
     
@@ -58,8 +60,8 @@ export default function Stockcard(props){
                   <div className="profile-card-inf__txt"><strong>Current price</strong></div>
                 </div>
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{GetStockAmount()}</div>
-                  <div className="profile-card-inf__txt"><strong>Pieces owned</strong></div>
+                  <div className="profile-card-inf__title">{`${StockAmount} pcs.`}</div>
+                  <div className="profile-card-inf__txt"><strong>Owned</strong></div>
                 </div>
               </div>
               <div className="profile-card-inf">
