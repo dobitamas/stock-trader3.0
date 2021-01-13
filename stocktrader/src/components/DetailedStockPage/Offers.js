@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import './Offers.css';
 import dayjs from "dayjs";
-import {Modal, Header, Title, Body, Footer, Button } from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 import OfferForm from './Form';
 import EditForm from './EditForm';
 
