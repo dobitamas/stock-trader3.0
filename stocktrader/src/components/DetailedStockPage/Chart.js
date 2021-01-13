@@ -179,7 +179,13 @@ export default function Chart(props){
     } else {
       console.log(VolumeData[0].volume)
     return(
-      <div class="chart-box">
+      
+      <div class="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
+        <ul class="pagination">
+          <li className="page-item"><a className="page-link" href="#">1 MIN</a></li>
+          <li className="page-item"><a className="page-link" href="#">5 MIN</a></li>
+          <li className="page-item"><a className="page-link" href="#">DAY</a></li>
+        </ul>
         <div id="chart-candlestick">
             <ReactApexChart options={options} series={series} type="candlestick" height={700} width={"100%"} />
         </div>
