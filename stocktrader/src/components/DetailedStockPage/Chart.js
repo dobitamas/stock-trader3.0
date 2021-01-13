@@ -164,13 +164,14 @@ export default function Chart(props){
         const axios = require('axios');
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
           .then((resp) => {
+
             setStockData(resp.data.reactCandleDataList)
             resp.data.reactVolumeDataList.map((vol) => (
               setVolumeData((oldVolumeData) => [...oldVolumeData, [vol.x, vol.volume]])
             ))
             setMinDate(resp.data.reactVolumeDataList[0].x)
             setMaxDate(resp.data.reactVolumeDataList[(resp.data.reactVolumeDataList.length)-1][1])
-            console.log(resp.data)
+            
           })
     }, [])
 

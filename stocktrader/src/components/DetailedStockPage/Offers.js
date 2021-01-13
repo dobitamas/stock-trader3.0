@@ -4,12 +4,14 @@ import './Offers.css';
 import dayjs from "dayjs";
 import {Modal, Header, Title, Body, Footer, Button } from 'react-bootstrap';
 import OfferForm from './Form';
+import EditForm from './EditForm';
 
 export default function OfferTable(props){
     const [Offers, setOffers] = useState([]);
-    const [IsModalVisible, setIsModalVisible] = useState(false);
-    
-    
+    const [isFormModalVisible, setisFormModalVisible] = useState(false);
+    const [isEditModalVisible, setisEditModalVisible] = useState(false);
+    const [Edited, setEdited] = useState({});
+
     useEffect(() => {
         axios
             .get(`http://localhost:8080/user/getuseraccount`)
@@ -39,8 +41,19 @@ export default function OfferTable(props){
         }
     }
 
-    function showModal(){
-        setIsModalVisible(true);
+    function showEditModal(object){
+        
+        setEdited(object);
+        setisEditModalVisible(true);
+    }
+
+    function hideEditModal(){
+        setEdited({});
+        setisEditModalVisible(false);
+    }
+
+    function showFormModal(){
+        setisFormModalVisible(true);
     }
 
     function OfferModal(props){
@@ -66,17 +79,48 @@ export default function OfferTable(props){
         )
     }
 
+    function EditModal(props){
+        console.log(Edited);
+        return(
+            <Modal
+            {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Edit your offer
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <EditForm id={Edited? Edited.id : 0} stock={Edited? Edited.stock.symbol : ""} type={Edited? Edited.offerType : ""} quantity={Edited? Edited.quantity : 0} price={Edited? Edited.price : 0} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+        )
+    }
+
     return(
     <div className = "profile-card">
         <OfferModal 
-        show={IsModalVisible}
-        onHide={() => setIsModalVisible(false)}
+        show={isFormModalVisible}
+        onHide={() => setisFormModalVisible(false)}
         />
+        
+        <EditModal
+        show={isEditModalVisible}
+        onHide={() => hideEditModal}
+        />
+        
+        
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showModal}>
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
                                             <i class="zmdi zmdi-plus"></i>Add item</button>
                                     </div>
                                 </div>
@@ -110,7 +154,7 @@ export default function OfferTable(props){
                                 <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
                                 <td className="text-center">
                                     <div className="table-data-feature">
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" >
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
                                             <i className="las la-edit" />
                                         </button>
                                         <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)}>
