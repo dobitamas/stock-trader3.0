@@ -94,7 +94,7 @@ export default function OfferTable(props){
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <EditForm id={Edited? Edited.id : 0} stock={Edited? Edited.stock.symbol : ""} type={Edited? Edited.offerType : ""} quantity={Edited? Edited.quantity : 0} price={Edited? Edited.price : 0} />
+        <EditForm id={Edited? Edited.id : 0} stock={Edited.stock? Edited.stock.symbol : ""} type={Edited? Edited.offerType : ""} quantity={Edited? Edited.quantity : 0} price={Edited? Edited.price : 0} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

@@ -1,10 +1,12 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import './Stockcard.scss';
 import axios from "axios";
+import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 
 export default function Stockcard(props){
     const [StockData,setStockData] = useState({});
     const [QuoteData, setQuoteData] = useState({});
+    const [AccData, setAccData] = useContext(MainpageAccountContext);
 
     useEffect(() => {
         axios
@@ -19,6 +21,14 @@ export default function Stockcard(props){
                 setQuoteData(resp.data);
             })
     }, [])
+
+    function GetStockAmount(){
+      AccData.portfolio.map((obj) => {
+        if(obj.stockPerformanceList.stock.name === StockData.name){
+          return(obj.stockPerformanceList.stockTotalAmount)
+        }
+      })
+    }
 
     if(!StockData){
         return(
@@ -94,6 +104,10 @@ export default function Stockcard(props){
                 <div className="profile-card-inf__item">
                   <div className="profile-card-inf__title">{`$ ${QuoteData.currentPrice}`}</div>
                   <div className="profile-card-inf__txt"><strong>Current price</strong></div>
+                </div>
+                <div className="profile-card-inf__item">
+                  <div className="profile-card-inf__title">{GetStockAmount}</div>
+                  <div className="profile-card-inf__txt"><strong>Pieces owned</strong></div>
                 </div>
               </div>
               <div className="profile-card-inf">

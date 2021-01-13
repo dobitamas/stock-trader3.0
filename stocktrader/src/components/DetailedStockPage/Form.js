@@ -30,7 +30,7 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controlId="stock">
                         <Form.Label>Select your stock</Form.Label>
-                            <Form.Control as="select" onChange={e => setStock(e.target.value)}>
+                            <Form.Control as="select" onChange={e => setStock(e.target.value)} required>
                                 <option>Stock</option>
                                 <option value={"TSLA"}>Tesla</option>
                                 <option value={"AAPL"}>Apple</option>
@@ -40,7 +40,7 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controlId="type">
                         <Form.Label>Select action</Form.Label>
-                            <Form.Control as="select" onChange={e => setType(e.target.value)}>
+                            <Form.Control as="select" onChange={e => setType(e.target.value)} required>
                                 <option>Type</option>
                                 <option value={"BUY"}>Buy</option>
                                 <option value={"SELL"}>Sell</option>
@@ -56,13 +56,13 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired quantity</Form.Label>
-                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)}/>
+                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} required/>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired price in $</Form.Label>
-                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)}/>
+                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} required/>
                     </Form.Group>
                 </Col>
             </Row>
