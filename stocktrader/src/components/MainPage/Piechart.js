@@ -1,50 +1,24 @@
 import React,{useState} from 'react';
-import Chart from "react-apexcharts";
-import './Piechart.css';
+import NVD3Chart from 'react-nvd3';
 
 
 export default function PieChart(props) {
-    const [State] = useState(
-        {
-        series: props.series,
-        options: {
-        chart: {
-            width: '50%',
-            type: 'donut',
-        },
-        labels: ['Stock', 'Cash'],
-        dataLabels: {
-            enabled: true,
-            color: "white",
-        },
-        responsive: [{
-            breakpoint: '50%',
-            options: {
-            chart: {
-                width: '50%'
-            },
-            legend: {
-                show: false
-            }
-            }
-        }],
-        legend: {
-            position: 'right',
-            offsetY: 50,
-            height: 230,
-            
-        }
-    }}
-    ); 
-  
+ 
+  const datum = [
+    {key: "Stock", y: props.series[0], color: "#264653"},
+    {key: "Cash", y: props.series[1], color: "#2A9D8F"},
+    
+];
 
  return ( 
-  <div>
-    <div className="chart-wrap">
-      <div id="chart" className="container">
-        <Chart options={State? State.options : {}} series={State? State.series : []} type="donut" width={"95%"} />
-      </div>
-    </div>
+  <div className="card m-3 border border-info">
+        <NVD3Chart id="chart" height={"575"} type="pieChart" datum={datum} x="key" y="y" donut labelType='percent' />
   </div>
  )
-}
+} 
+
+
+
+
+ 
+
