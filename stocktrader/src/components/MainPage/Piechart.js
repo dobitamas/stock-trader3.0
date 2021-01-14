@@ -3,7 +3,7 @@ import NVD3Chart from 'react-nvd3';
 
 
 export default function PieChart(props) {
-
+ 
   const datum = [
     {key: "Stock", y: props.series[0], color: "#264653"},
     {key: "Cash", y: props.series[1], color: "#2A9D8F"},

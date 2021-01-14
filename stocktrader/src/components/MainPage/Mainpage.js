@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import PieChart from './PieChart';
+import PieChart from './Piechart';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import Portfolioperformance from './Portfolioperformance';
 import CashStockProfit from './CashStockProfit';

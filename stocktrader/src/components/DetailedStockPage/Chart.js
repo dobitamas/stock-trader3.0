@@ -112,7 +112,7 @@ export default function Chart(props){
       },
       yaxis: {
         labels: {
-          show: false,
+          show: true,
         }
       }
     };
