@@ -3,13 +3,28 @@ import ReactApexChart from 'react-apexcharts';
 
 
 export default function Chart(props){
-    const [StockData, setStockData] = useState([]);
-    const [VolumeData, setVolumeData] = useState([]);
-    const [MinDate, setMinDate] = useState();
-    const [MaxDate, setMaxDate] = useState();
+
+    const [StockDataApex, setStockDataApex] = useState([]);
+    const [StockData1, setStockData1] = useState([]);
+    const [StockData5, setStockData5] = useState([]);
+    const [StockDataD, setStockDataD] = useState([]);
+
+    const [VolumeDataApex, setVolumeDataApex] = useState([]);   
+    const [VolumeData1, setVolumeData1] = useState([]);
+    const [VolumeData5, setVolumeData5] = useState([]);
+    const [VolumeDataD, setVolumeDataD] = useState([]);
+
+    const [MinDateApex, setMinDateApex] = useState();
+    const [MaxDateApex, setMaxDateApex] = useState();
+    const [MinDate1, setMinDate1] = useState();
+    const [MaxDate1, setMaxDate1] = useState();
+    const [MinDate5, setMinDate5] = useState();
+    const [MaxDate5, setMaxDate5] = useState();
+    const [MinDateD, setMinDateD] = useState();
+    const [MaxDateD, setMaxDateD] = useState();
 
     const series = [{
-      data: StockData
+      data: StockDataApex
     }];
 
     const options = {
@@ -40,7 +55,7 @@ export default function Chart(props){
   
     const seriesBar = [{
       name: 'volume',
-      data: VolumeData
+      data: VolumeDataApex
     }];
     const optionsBar = {
       chart: {
@@ -54,8 +69,8 @@ export default function Chart(props){
         selection: {
           enabled: true,
           xaxis: {
-            min: MinDate,
-            max: MaxDate
+            min: MinDateApex,
+            max: MaxDateApex
           },
           fill: {
             color: '#ccc',
@@ -109,21 +124,26 @@ export default function Chart(props){
         const axios = require('axios');
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
           .then((resp) => {
+            setStockData1(resp.data.reactCandle1.reactCandleDataList)
+            // resp.data.reactVolumeDataList.map((vol) => (
+            //   setVolumeData((oldVolumeData) => [...oldVolumeData, [vol.x, vol.volume]])
+            // ))
+            setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
+            setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
+            setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
+            console.log(resp.data)
 
-            setStockData(resp.data.reactCandleDataList)
-            resp.data.reactVolumeDataList.map((vol) => (
-              setVolumeData((oldVolumeData) => [...oldVolumeData, [vol.x, vol.volume]])
-            ))
-            setMinDate(resp.data.reactVolumeDataList[0].x)
-            setMaxDate(resp.data.reactVolumeDataList[(resp.data.reactVolumeDataList.length)-1][1])
-            
+            setMinDateApex(resp.data.reactCandle1.reactVolumeDataList[0][1])
+            setMaxDateApex(resp.data.reactCandle1.reactVolumeDataList[(resp.data.reactCandle1.reactVolumeDataList.length)-1][1])
+            setStockDataApex(resp.data.reactCandle1.reactCandleDataList)
+            setVolumeDataApex(resp.data.reactCandle1.reactVolumeDataList)
+
           })
     }, [props.symbol])
 
-    if (VolumeData.length < 1) {
+    if (StockDataApex.length < 1) {
       return "Loading";
     } else {
-      console.log(VolumeData[0].volume)
     return(
       
       <div class="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
