@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 
 
 export default function Chart(props){
-
+    const [SelectedInterval, setSelectedInterval] = useState(1);
     const [StockDataApex, setStockDataApex] = useState([]);
     const [StockData1, setStockData1] = useState([]);
     const [StockData5, setStockData5] = useState([]);
@@ -117,7 +117,27 @@ export default function Chart(props){
       }
     };
 
-
+    function ChangeInterval(interval){
+      if(interval === 1){
+        setMinDateApex(MinDate1);
+        setMaxDateApex(MaxDate1);
+        setStockDataApex(StockData1);
+        setVolumeDataApex(VolumeData1);
+        setSelectedInterval(1);
+      } else if(interval === 5) {
+        setMinDateApex(MinDate5);
+        setMaxDateApex(MaxDate5);
+        setStockDataApex(StockData5);
+        setVolumeDataApex(VolumeData5);
+        setSelectedInterval(5);
+      } else{
+        setMinDateApex(MinDateD);
+        setMaxDateApex(MaxDateD);
+        setStockDataApex(StockDataD);
+        setVolumeDataApex(VolumeDataD);
+        setSelectedInterval(24);
+      }
+    }
 
 
     useEffect(() => {
@@ -125,32 +145,42 @@ export default function Chart(props){
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
-            // resp.data.reactVolumeDataList.map((vol) => (
-            //   setVolumeData((oldVolumeData) => [...oldVolumeData, [vol.x, vol.volume]])
-            // ))
             setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
             setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
             setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
-            console.log(resp.data)
+            
+            setStockData5(resp.data.reactCandle5.reactCandleDataList)
+            setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)
+            setMinDate5(resp.data.reactCandle5.reactCandleDataList[0].x)
+            setMaxDate5(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
 
-            setMinDateApex(resp.data.reactCandle1.reactVolumeDataList[0][1])
-            setMaxDateApex(resp.data.reactCandle1.reactVolumeDataList[(resp.data.reactCandle1.reactVolumeDataList.length)-1][1])
+            setStockDataD(resp.data.reactCandleD.reactCandleDataList)
+            setVolumeDataD(resp.data.reactCandleD.reactVolumeDataList)
+            setMinDateD(resp.data.reactCandleD.reactCandleDataList[0].x)
+            setMaxDateD(resp.data.reactCandleD.reactCandleDataList[(resp.data.reactCandleD.reactCandleDataList.length)-1].x)
+
+
+            setMinDateApex(resp.data.reactCandle1.reactCandleDataList[0].x)
+            setMaxDateApex(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
+            
             setStockDataApex(resp.data.reactCandle1.reactCandleDataList)
             setVolumeDataApex(resp.data.reactCandle1.reactVolumeDataList)
+            
 
           })
     }, [props.symbol])
 
-    if (StockDataApex.length < 1) {
+    if (VolumeDataApex.length < 1 && StockDataApex < 1) {
       return "Loading";
     } else {
     return(
       
       <div class="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
+        <h3>Selected: {SelectedInterval}</h3>
         <ul class="pagination">
-          <li className="page-item"><a className="page-link" href="#">1 MIN</a></li>
-          <li className="page-item"><a className="page-link" href="#">5 MIN</a></li>
-          <li className="page-item"><a className="page-link" href="#">DAY</a></li>
+          <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval(1)}>1 MIN</button></li>
+          <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval(5)}>5 MIN</button></li>
+          <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval("D")}>DAY</button></li>
         </ul>
         <div id="chart-candlestick">
             <ReactApexChart options={options} series={series} type="candlestick" height={700} width={"100%"} />
