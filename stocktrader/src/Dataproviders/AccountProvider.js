@@ -1,131 +1,99 @@
 import React, {createContext,useState, useEffect} from 'react';
+import axios from "axios";
+
 
 export const MainpageAccountContext = createContext();
 
 
 export const MainpageAccountProvider = (props) => {
     const [AccData, setAccData] = useState({
-        "id": 8,
-        "username": "Mr.T",
-        "cash": 994497.58,
-        "cashInvested": 1000000.0,
-        "portfolio": [
-          {
-            "id": 23,
-            "stock": {
-              "id": 1,
-              "name": "Apple",
-              "symbol": "AAPL"
-            },
-            "purchasePrice": 131.01,
-            "quantity": 42,
-            "purchaseDate": "2021-01-06T10:34:39.616+00:00"
+      "id": 8,
+      "username": "Mr.T",
+      "cash": 1007193.6,
+      "cashInvested": 1000000.0,
+      "portfolio": [
+        {
+          "id": 4017,
+          "stock": {
+            "id": 1,
+            "name": "Apple",
+            "symbol": "AAPL"
           },
-          {
-            "id": 11,
-            "stock": {
-              "id": 1,
-              "name": "Apple",
-              "symbol": "AAPL"
-            },
-            "purchasePrice": 170.23,
-            "quantity": 200,
-            "purchaseDate": "2021-01-06T10:34:39.122+00:00"
+          "purchasePrice": 128.8,
+          "quantity": 100,
+          "purchaseDate": "2021-01-13T10:35:08.620+00:00"
+        },
+        {
+          "id": 3998,
+          "stock": {
+            "id": 1,
+            "name": "Apple",
+            "symbol": "AAPL"
           },
-          {
-            "id": 10,
-            "stock": {
-              "id": 1,
-              "name": "Apple",
-              "symbol": "AAPL"
-            },
-            "purchasePrice": 150.23,
-            "quantity": 100,
-            "purchaseDate": "2021-01-06T10:34:39.122+00:00"
+          "purchasePrice": 128.8,
+          "quantity": 42,
+          "purchaseDate": "2021-01-13T08:41:45.243+00:00"
+        },
+        {
+          "id": 11,
+          "stock": {
+            "id": 1,
+            "name": "Apple",
+            "symbol": "AAPL"
           },
-          {
-            "id": 12,
-            "stock": {
-              "id": 2,
-              "name": "Tesla Inc.",
-              "symbol": "TSLA"
-            },
-            "purchasePrice": 250.44,
-            "quantity": 30,
-            "purchaseDate": "2021-01-06T10:34:39.124+00:00"
-          }
-        ],
-        "offers": [
-          {
-            "id": 14,
-            "stock": {
-              "id": 1,
-              "name": "Apple",
-              "symbol": "AAPL"
-            },
-            "price": 70.2,
-            "quantity": 102,
-            "totalValue": 7160.4,
-            "offerType": "BUY",
-            "offerDate": "2021-01-06T10:34:39.168+00:00"
+          "purchasePrice": 170.23,
+          "quantity": 200,
+          "purchaseDate": "2021-01-13T08:41:34.240+00:00"
+        },
+        {
+          "id": 10,
+          "stock": {
+            "id": 1,
+            "name": "Apple",
+            "symbol": "AAPL"
           },
-          {
-            "id": 15,
-            "stock": {
-              "id": 2,
-              "name": "Tesla Inc.",
-              "symbol": "TSLA"
-            },
-            "price": 510.2,
-            "quantity": 15,
-            "totalValue": 7653.0,
-            "offerType": "BUY",
-            "offerDate": "2021-01-06T10:34:39.168+00:00"
-          }
-        ],
-        "stockPerformanceList": [
-          {
-            "id": 1524,
-            "stock": {
-              "id": 2,
-              "name": "Tesla Inc.",
-              "symbol": "TSLA"
-            },
-            "stockTotalAmount": 30,
-            "averagePurchasePrice": 250.44,
-            "totalPurchaseValue": 7513.2,
-            "stockCurrentPrice": 735.11,
-            "stockCurrentValue": 22053.3,
-            "stockValueChange": 1.94
-          },
-          {
-            "id": 1525,
-            "stock": {
-              "id": 1,
-              "name": "Apple",
-              "symbol": "AAPL"
-            },
-            "stockTotalAmount": 342,
-            "averagePurchasePrice": 159.57,
-            "totalPurchaseValue": 54571.42,
-            "stockCurrentPrice": 131.01,
-            "stockCurrentValue": 44805.42,
-            "stockValueChange": -0.18
-          }
-        ],
-        "portfolioPerformance": {
-          "id": 9,
-          "portfolioTotalValue": 1061356.3,
-          "portfolioTotalStockValue": 66858.72,
-          "percentageStockValue": 6.3,
-          "percentageCashValue": 93.7,
-          "currentStockProfit": 4774.1,
-          "investedCashProfit": 61356.3,
-          "percentageCurrentStockProfit": 7.14,
-          "percentageInvestedCashProfit": 6.14
+          "purchasePrice": 150.23,
+          "quantity": 100,
+          "purchaseDate": "2021-01-13T08:41:34.240+00:00"
         }
-      });
+      ],
+      "offers": [
+        
+      ],
+      "stockPerformanceList": [
+        {
+          "id": 4042,
+          "stock": {
+            "id": 1,
+            "name": "Apple",
+            "symbol": "AAPL"
+          },
+          "stockTotalAmount": 442,
+          "averagePurchasePrice": 152.4,
+          "totalPurchaseValue": 67358.6,
+          "stockCurrentPrice": 128.8,
+          "stockCurrentValue": 56929.6,
+          "stockValueChange": -0.15
+        }
+      ],
+      "portfolioPerformance": {
+        "id": 9,
+        "portfolioTotalValue": 1064123.2,
+        "portfolioTotalStockValue": 56929.6,
+        "percentageStockValue": 5.35,
+        "percentageCashValue": 94.65,
+        "currentStockProfit": -10429.0,
+        "investedCashProfit": 64123.2,
+        "percentageCurrentStockProfit": -18.32,
+        "percentageInvestedCashProfit": 6.41
+      }
+    });
     
+      useEffect(() => {
+        axios
+          .get('http://localhost:8080/user/getuseraccount')
+          .then((resp) => setAccData(resp.data));
+      }, [])
 
       return(
             <MainpageAccountContext.Provider value={[AccData, setAccData]} >
@@ -133,4 +101,4 @@ export const MainpageAccountProvider = (props) => {
             </MainpageAccountContext.Provider>
         );
   
-} 
+}  

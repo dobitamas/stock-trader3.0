@@ -1,7 +1,6 @@
 import './App.css';
 import React, {useEffect} from 'react'
 import {Helmet} from 'react-helmet';
-import {Feather} from 'feather-icons';
 /*import '../node_modules/bootstrap/dist/css/bootstrap.css';*/
 import '../src/scss/custom.scss';
 import { BrowserRouter as Router, Route} from "react-router-dom";
@@ -27,7 +26,7 @@ function App() {
       <input className="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search"/>
       <ul className="navbar-nav px-3">
         <li className="nav-item text-nowrap">
-          <a className="nav-link" href="#">Sign in</a>
+          <a className="nav-link" >Sign in</a>
         </li>
       </ul>
     </nav>
@@ -38,37 +37,37 @@ function App() {
           <div className="sidebar-sticky">
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <a className="nav-link active" >
                   <span data-feather="home"></span>
                   Mainpage <span className="sr-only">(current)</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="file"></span>
                   Orders
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="shopping-cart"></span>
                   Products
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="users"></span>
                   Customers
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="bar-chart-2"></span>
                   Reports
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="layers"></span>
                   Integrations
                 </a>
@@ -77,31 +76,31 @@ function App() {
 
             <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Saved reports</span>
-              <a className="d-flex align-items-center text-muted" href="#">
+              <a className="d-flex align-items-center text-muted" >
                 <span data-feather="plus-circle"></span>
               </a>
             </h6>
             <ul className="nav flex-column mb-2">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="file-text"></span>
                   Current month
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="file-text"></span>
                   Last quarter
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="file-text"></span>
                   Social engagement
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" >
                   <span data-feather="file-text"></span>
                   Year-end sale
                 </a>

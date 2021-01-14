@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useContext} from 'react';
+import React,{useContext} from 'react';
 import PieChart from './Piechart';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import Portfolioperformance from './Portfolioperformance';
@@ -7,7 +7,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 
 export default function Mainpage(){
-    const [AccData, setAccData] = useContext(MainpageAccountContext);
+    const [AccData] = useContext(MainpageAccountContext);
 
     return(
         <div className="container-fluid,">
