@@ -1,8 +1,7 @@
 import React, {useContext} from 'react';
 import '../DetailedStockPage/Offers.css';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
-import dayjs from "dayjs";
-
+import {Row, Col, Card, Table} from 'react-bootstrap';
 
 export default function StocksTable(){
     const [AccData] = useContext(MainpageAccountContext);
@@ -45,7 +44,8 @@ export default function StocksTable(){
                                 <td className="text-center">{`$ ${object.stockCurrentValue}`}</td>
                                 <td className="text-center">{object.stockValueChange}</td>
                             </tr>    
-                        </React.Fragment>)
+                        </React.Fragment>
+                        )
                 })}
                 
             </tbody>
