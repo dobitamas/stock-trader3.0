@@ -14,7 +14,7 @@ function App() {
 }, [])
 
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: "#f4f7fa"}}>
             <Helmet>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -43,9 +43,9 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" >
-                  <span data-feather="file"></span>
-                  Orders
+                <a className="nav-link" href="/stockpage" >
+                  <span data-feather="file" ></span>
+                  Stockpage
                 </a>
               </li>
               <li className="nav-item">
@@ -145,5 +145,5 @@ function App() {
     </div> 
   );
 }
-
+ 
 export default App;

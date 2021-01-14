@@ -1,38 +1,62 @@
 import React,{useContext} from 'react';
-import PieChart from './Piechart';
+import PieChart from './PieChart';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import Portfolioperformance from './Portfolioperformance';
 import CashStockProfit from './CashStockProfit';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import StocksTable from './StocksTable';
+import LineChart from './LineChart';
 
 
 export default function Mainpage(){
     const [AccData] = useContext(MainpageAccountContext);
 
     return(
-        <div className="container-fluid,">
+        <div>
             <div className="row">
                 <div className="col">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">Portfolio balance</div>
-                            <div class="card-body">
-                                <PieChart series={[AccData.portfolioPerformance.percentageStockValue, AccData.portfolioPerformance.percentageCashValue]} />
+                    <div class="card m-3 border border-primary container-fluid" >
+                        <h3 style={{textAlign: "center"}}>Portfolio balance</h3>
+                        <div className="row">
+                            <div className="col">
+                                <div>
+                                    <PieChart series={[AccData.portfolioPerformance.percentageStockValue, AccData.portfolioPerformance.percentageCashValue]}/>
+                                </div>
                             </div>
-                    </div>    
+                            <div className="col">
+                                <div style={{textAlign: "right"}}>
+                                    <div className=" card m-3 border border-info">
+                                        <Portfolioperformance Performance={AccData.portfolioPerformance} />
+                                        <LineChart Performance={AccData.portfolioPerformance}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Portfolioperformance Performance={AccData.portfolioPerformance} />                
+                            
             </div>
             <div className="row">
                 <div className="col">
-                <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">Portfolio performance</div>
-                            <div class="card-body">
-                            <CashStockProfit Performance={AccData.portfolioPerformance} />
-                            </div>
+                        <div class="card m-3 border border-primary container-fluid">
+                            <h3 style={{textAlign: "center"}}>Portfolio balance</h3>
+                                <div style={{textAlign: "right"}}>
+                                    <CashStockProfit Performance={AccData.portfolioPerformance} />
+                                </div>
+                        </div>    
                     </div>
-                </div>
                 <div className="col">
                     {/*<Profit />*/}
+                </div>
+            </div>
+            <div className="row">
+            <div className="col">
+                    <div className="card m-3 border border-primary">
+                        <h3 style={{textAlign:"center"}}>Portfolio performance</h3>
+                            <div style={{textAlign: "center"}}>
+                                <StocksTable/>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
