@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 
@@ -7,7 +7,15 @@ export default function EditForm(props){
     const [Type, setType] = useState(props.type);
     const [Price, setPrice] = useState(props.price);
     const [Quantity, setQuantity] = useState(props.quantity);
+    const [MoneyNeeded, setMoneyNeeded] = useState(0);
     
+
+    function changeType(type){
+        setType(type);
+        props.getNumber(Stock);
+    }
+
+
     function SendApi() {
         if(Stock === ""){
             alert(<Alert variant="danger">Select stock!</Alert>)
@@ -23,6 +31,10 @@ export default function EditForm(props){
             .post(`http://localhost:8080/user/replaceoffer/${props.id}/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));
     }
+
+    useEffect(() => {
+        setMoneyNeeded(Price * Quantity);
+    }, [Price, Quantity])
 
     return(
         <div>
@@ -41,7 +53,7 @@ export default function EditForm(props){
                 <Col>
                     <Form.Group controlId="type">
                         <Form.Label>Select action</Form.Label>
-                            <Form.Control as="select" onChange={e => setType(e.target.value)} value={Type} required>
+                            <Form.Control as="select" onChange={e => changeType(e.target.value)} value={Type} required>
                                 <option>Type</option>
                                 <option value={"BUY"}>Buy</option>
                                 <option value={"SELL"}>Sell</option>
@@ -66,9 +78,21 @@ export default function EditForm(props){
                             <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} value={Price} required/>
                     </Form.Group>
                 </Col>
-            </Row> 
-			    <Button type="submit" onClick={SendApi}>Submit offer</Button>
-			</Form>
+            </Row>
+                <Row>
+                    <Col>
+                        <Button type="submit" onClick={SendApi}>Submit change!</Button>
+                    </Col>
+                    <Col>
+                        {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>Number:{props.available}</h3> : <p></p>}
+                    </Col>
+                    <Col>
+                        {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
+                        
+                    </Col>
+                </Row> 
+			</Form> 
         </div>
         
     )
