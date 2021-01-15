@@ -27,7 +27,7 @@ export default function OfferForm(props){
 
     useEffect(() => {
         setMoneyNeeded(Price * Quantity);
-    }, [Price, Quantity])
+    }, [Price, Quantity, Type])
 
     return(
         <Form>
@@ -76,10 +76,10 @@ export default function OfferForm(props){
                     <Button type="submit" onClick={SendApi}>Submit offer</Button>
                 </Col>
                 <Col>
-                    <h3>You have:{`$ ${props.cash}`} </h3>
+                    {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}
                 </Col>
                 <Col>
-                    <h3>You need: {`$ ${MoneyNeeded}`}</h3>
+                    {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
                 </Col>
             </Row>
 			    
