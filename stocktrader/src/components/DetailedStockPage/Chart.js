@@ -165,7 +165,7 @@ export default function Chart(props){
             
             setStockDataApex(resp.data.reactCandle1.reactCandleDataList)
             setVolumeDataApex(resp.data.reactCandle1.reactVolumeDataList)
-            
+            console.log(resp.data)
 
           })
     }, [props.symbol])
