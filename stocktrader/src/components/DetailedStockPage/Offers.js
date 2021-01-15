@@ -10,6 +10,7 @@ export default function OfferTable(props){
     const [Offers, setOffers] = useState([]);
     const [isFormModalVisible, setisFormModalVisible] = useState(false);
     const [isEditModalVisible, setisEditModalVisible] = useState(false);
+    const [Cash, setCash] = useState(0);
     const [Edited, setEdited] = useState({});
 
     useEffect(() => {
@@ -17,14 +18,13 @@ export default function OfferTable(props){
             .get(`http://localhost:8080/user/getuseraccount`)
             .then((resp) =>{
                 setOffers(resp.data.offers);
+                setCash(resp.data.cash)
             })
     }, [])
 
     function DeleteOffer(id){
-        console.log("delete offer");
-        console.log(id);
         axios
-            .delete(`http://localhost:8080/user/deleteoffer/${id}`);
+            .delete(`http://localhost:8080/user/deleteoffer/${id}`);;
     }
 
     function DecideOfferType(i){
@@ -70,7 +70,7 @@ export default function OfferTable(props){
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <OfferForm />
+        <OfferForm cash={Cash}/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -157,7 +157,7 @@ export default function OfferTable(props){
                                         <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
                                             <i className="las la-edit" />
                                         </button>
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)}>
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
                                             <i className="la la-trash" />
                                         </button>
                                     </div>

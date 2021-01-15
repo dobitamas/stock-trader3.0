@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 
@@ -7,7 +7,8 @@ export default function OfferForm(props){
     const [Type, setType] = useState("");
     const [Price, setPrice] = useState(0);
     const [Quantity, setQuantity] = useState(0);
-    
+    const [MoneyNeeded, setMoneyNeeded] = useState(0);
+
     function SendApi() {
         if(Stock === ""){
             return(<Alert variant="danger">Select stock!</Alert>)
@@ -23,6 +24,10 @@ export default function OfferForm(props){
             .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));
     }
+
+    useEffect(() => {
+        setMoneyNeeded(Price * Quantity);
+    }, [Price, Quantity])
 
     return(
         <Form>
@@ -66,7 +71,18 @@ export default function OfferForm(props){
                     </Form.Group>
                 </Col>
             </Row>
-			    <Button type="submit" onClick={SendApi}>Submit offer</Button>
+            <Row>
+                <Col>
+                    <Button type="submit" onClick={SendApi}>Submit offer</Button>
+                </Col>
+                <Col>
+                    <h3>You have:{`$ ${props.cash}`} </h3>
+                </Col>
+                <Col>
+                    <h3>You need: {`$ ${MoneyNeeded}`}</h3>
+                </Col>
+            </Row>
+			    
 			</Form>
 
     )
