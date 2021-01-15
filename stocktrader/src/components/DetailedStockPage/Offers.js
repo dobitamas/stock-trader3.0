@@ -1,30 +1,43 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios";
 import './Offers.css';
 import dayjs from "dayjs";
 import {Modal, Button} from 'react-bootstrap';
 import OfferForm from './Form';
 import EditForm from './EditForm';
+import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
+
 
 export default function OfferTable(props){
     const [Offers, setOffers] = useState([]);
     const [isFormModalVisible, setisFormModalVisible] = useState(false);
     const [isEditModalVisible, setisEditModalVisible] = useState(false);
+    const [Cash, setCash] = useState(0);
     const [Edited, setEdited] = useState({});
+    const [Available, setAvailable] = useState(0);
+    const [AccData] = useContext(MainpageAccountContext);
+
+
+    const getNumberOfStocks = (symbol) => {
+      AccData.stockPerformanceList.map((object) => {
+        if(object.stock.symbol === symbol){
+          setAvailable(object.stockTotalAmount);
+        }
+      })
+    }
 
     useEffect(() => {
         axios
             .get(`http://localhost:8080/user/getuseraccount`)
             .then((resp) =>{
                 setOffers(resp.data.offers);
+                setCash(resp.data.cash)
             })
     }, [])
 
     function DeleteOffer(id){
-        console.log("delete offer");
-        console.log(id);
         axios
-            .delete(`http://localhost:8080/user/deleteoffer/${id}`);
+            .delete(`http://localhost:8080/user/deleteoffer/${id}`);;
     }
 
     function DecideOfferType(i){
@@ -70,7 +83,7 @@ export default function OfferTable(props){
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <OfferForm />
+        <OfferForm cash={Cash} available={Available} getNumber={getNumberOfStocks} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -94,7 +107,7 @@ export default function OfferTable(props){
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <EditForm id={Edited? Edited.id : 0} stock={Edited.stock? Edited.stock.symbol : ""} type={Edited? Edited.offerType : ""} quantity={Edited? Edited.quantity : 0} price={Edited? Edited.price : 0} />
+        <EditForm available={Available} getNumber={getNumberOfStocks} id={Edited? Edited.id : 0} stock={Edited.stock? Edited.stock.symbol : ""} type={Edited? Edited.offerType : ""} quantity={Edited? Edited.quantity : 0} price={Edited? Edited.price : 0} cash={Cash}/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -114,8 +127,6 @@ export default function OfferTable(props){
         show={isEditModalVisible}
         onHide={() => hideEditModal}
         />
-        
-        
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                     </div>
@@ -157,16 +168,14 @@ export default function OfferTable(props){
                                         <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
                                             <i className="las la-edit" />
                                         </button>
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)}>
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
                                             <i className="la la-trash" />
                                         </button>
                                     </div>
                                 </td>
                             </tr>
-                            
                         </React.Fragment>)
                 })}
-                
             </tbody>
           </table>
         </div>

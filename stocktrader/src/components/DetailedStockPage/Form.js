@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 
@@ -7,7 +7,15 @@ export default function OfferForm(props){
     const [Type, setType] = useState("");
     const [Price, setPrice] = useState(0);
     const [Quantity, setQuantity] = useState(0);
-    
+    const [MoneyNeeded, setMoneyNeeded] = useState(0);
+
+
+    function changeType(type){
+        props.getNumber(Stock);
+        setType(type);
+    }
+
+
     function SendApi() {
         if(Stock === ""){
             return(<Alert variant="danger">Select stock!</Alert>)
@@ -23,6 +31,10 @@ export default function OfferForm(props){
             .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));
     }
+
+    useEffect(() => {
+        setMoneyNeeded(Price * Quantity);
+    }, [Price, Quantity, Type])
 
     return(
         <Form>
@@ -40,7 +52,7 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controlId="type">
                         <Form.Label>Select action</Form.Label>
-                            <Form.Control as="select" onChange={e => setType(e.target.value)} required>
+                            <Form.Control as="select" onChange={e => changeType(e.target.value)} required>
                                 <option>Type</option>
                                 <option value={"BUY"}>Buy</option>
                                 <option value={"SELL"}>Sell</option>
@@ -66,7 +78,19 @@ export default function OfferForm(props){
                     </Form.Group>
                 </Col>
             </Row>
-			    <Button type="submit" onClick={SendApi}>Submit offer</Button>
+            <Row>
+                <Col>
+                    <Button type="submit" onClick={SendApi}>Submit offer</Button>
+                </Col>
+                <Col>
+                    {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}
+                    {Type==="SELL"? <h3>Number: {props.available}</h3> : <p></p>}
+                </Col>
+                <Col>
+                    {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
+                </Col>
+            </Row>
+			    
 			</Form>
 
     )
