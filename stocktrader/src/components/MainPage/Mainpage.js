@@ -6,6 +6,7 @@ import CashStockProfit from './CashStockProfit';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import StocksTable from './StocksTable';
 import LineChart from './LineChart';
+import Profile from './Profile';
 
 
 export default function Mainpage(){
@@ -19,8 +20,8 @@ export default function Mainpage(){
                         <h3 style={{textAlign: "center"}}>Portfolio balance</h3>
                         <div className="row">
                             <div className="col">
-                                <div>
-                                    <PieChart series={[AccData.portfolioPerformance.percentageStockValue, AccData.portfolioPerformance.percentageCashValue]}/>
+                                <div className="card m-3 border border-info">
+                                    <Profile />
                                 </div>
                             </div>
                             <div className="col">
@@ -46,7 +47,8 @@ export default function Mainpage(){
                         </div>    
                     </div>
                 <div className="col">
-                    {/*<Profit />*/}
+                    {/*<Profit />*/} 
+                    
                 </div>
             </div>
             <div className="row">

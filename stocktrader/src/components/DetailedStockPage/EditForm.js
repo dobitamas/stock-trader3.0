@@ -63,7 +63,6 @@ export default function EditForm(props){
                 
             </Row>
             <Row>
-                
             </Row>
             <Row>
                 <Col>
@@ -89,7 +88,6 @@ export default function EditForm(props){
                     </Col>
                     <Col>
                         {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
-                        
                     </Col>
                 </Row> 
 			</Form> 
