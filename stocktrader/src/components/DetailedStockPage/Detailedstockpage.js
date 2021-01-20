@@ -1,4 +1,5 @@
 import React from 'react';
+import StocksTable from '../MainPage/StocksTable';
 import Chart from './Chart';
 import Offers from './Offers';
 import Stockcard from './Stockcard';
@@ -19,7 +20,7 @@ export default function Detailedstockpage(props){
             </div>
             <div className="row">
                 <div className="col mt-5">
-                    <Offers />
+                    <Offers/>
                 </div>
             </div>
         </div>

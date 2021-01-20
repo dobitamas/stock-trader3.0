@@ -135,7 +135,7 @@ export default function OfferTable(props){
                                             <i class="zmdi zmdi-plus"></i>Add item</button>
                                     </div>
                                 </div>
-        <div className="table-responsive table-responsive-data2">
+        <div className="table-responsive table-responsive-data2 mx-auto">
           <table className="table table-data2">
             <thead>
               <tr style={{textAlign:"center"}}>
