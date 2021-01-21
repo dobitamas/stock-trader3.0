@@ -28,11 +28,16 @@ export default function OfferTable(props){
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/user/getuseraccount`)
+            .get(`http://localhost:8080/user/getalloffers`)
             .then((resp) =>{
-                setOffers(resp.data.offers);
-                setCash(resp.data.cash)
+                setOffers(resp.data);
             })
+        axios
+            .get(`http://localhost:8080/user/getcash`)
+            .then((resp) =>{
+              setCash(resp.data)
+            })
+
     }, [])
 
     function DeleteOffer(id){
@@ -115,70 +120,74 @@ export default function OfferTable(props){
     </Modal>
         )
     }
-
-    return(
-    <div className = "profile-card">
-        <OfferModal 
-        show={isFormModalVisible}
-        onHide={() => setisFormModalVisible(false)}
-        />
-        
-        <EditModal
-        show={isEditModalVisible}
-        onHide={() => hideEditModal}
-        />
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
+    if(Offers.length > 0){
+      return(
+        <div className = "profile-card">
+            <OfferModal 
+            show={isFormModalVisible}
+            onHide={() => setisFormModalVisible(false)}
+            />
+            
+            <EditModal
+            show={isEditModalVisible}
+            onHide={() => hideEditModal}
+            />
+                                    <div class="table-data__tool">
+                                        <div class="table-data__tool-left">
+                                        </div>
+                                        <div class="table-data__tool-right">
+                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
+                                                <i class="zmdi zmdi-plus"></i>Add item</button>
+                                        </div>
                                     </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
-                                            <i class="zmdi zmdi-plus"></i>Add item</button>
-                                    </div>
-                                </div>
-        <div className="table-responsive table-responsive-data2 mx-auto">
-          <table className="table table-data2">
-            <thead>
-              <tr style={{textAlign:"center"}}>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Total value</th>
-                <th>Price</th>
-                <th>Offer type</th>
-                <th>Offer date</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                {Offers.map( (object, i) => {
-                    let OfferType = DecideOfferType(i);
-                    return(
-                        <React.Fragment>
-                            {isSpacer(i)}
-                            <tr className="tr-shadow">
-                                <td className="text-center">{object.id}</td>
-                                <td className="text-center">{object.stock.name}</td>
-                                <td className="text-center">{object.quantity}</td>
-                                <td className="text-center">{`$ ${object.totalValue}`}</td>
-                                <td className="text-center">{`$ ${object.price}`}</td>
-                                <td className="text-center align-middle">{OfferType}</td>
-                                <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
-                                <td className="text-center">
-                                    <div className="table-data-feature">
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
-                                            <i className="las la-edit" />
-                                        </button>
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
-                                            <i className="la la-trash" />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </React.Fragment>)
-                })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      )
+            <div className="table-responsive table-responsive-data2 mx-auto">
+              <table className="table table-data2">
+                <thead>
+                  <tr style={{textAlign:"center"}}>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Total value</th>
+                    <th>Price</th>
+                    <th>Offer type</th>
+                    <th>Offer date</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {Offers.map( (object, i) => {
+                        let OfferType = DecideOfferType(i);
+                        return(
+                            <React.Fragment>
+                                {isSpacer(i)}
+                                <tr className="tr-shadow">
+                                    <td className="text-center">{object.id}</td>
+                                    <td className="text-center">{object.stock.name}</td>
+                                    <td className="text-center">{object.quantity}</td>
+                                    <td className="text-center">{`$ ${object.totalValue}`}</td>
+                                    <td className="text-center">{`$ ${object.price}`}</td>
+                                    <td className="text-center align-middle">{OfferType}</td>
+                                    <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
+                                    <td className="text-center">
+                                        <div className="table-data-feature">
+                                            <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
+                                                <i className="las la-edit" />
+                                            </button>
+                                            <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
+                                                <i className="la la-trash" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </React.Fragment>)
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          )
+    } else {
+      return(<h1>Loading..</h1>)
+    }
+    
 }

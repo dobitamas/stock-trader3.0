@@ -174,8 +174,7 @@ export default function Chart(props){
       return "Loading";
     } else {
     return(
-      
-      <div className="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
+      <div className="chart-box profile-card" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
         <h3 className="ml-3">Selected: {SelectedInterval}</h3>
         <ul className="pagination ml-3 mt-3">
           <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval(1)}>1 MIN</button></li>
