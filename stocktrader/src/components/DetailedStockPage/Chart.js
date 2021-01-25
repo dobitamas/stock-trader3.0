@@ -171,7 +171,18 @@ export default function Chart(props){
     }, [props.symbol])
 
     if (VolumeDataApex.length < 1 && StockDataApex < 1) {
-      return "Loading";
+      return (
+          <div>
+              <img
+                className = "mx-auto d-block"
+                id="loading"
+                src="/candle_loader.gif"
+                alt="loading candle chart"
+                width="70%"
+                height="auto"
+              />
+          </div>
+      );
     } else {
     return(
       
