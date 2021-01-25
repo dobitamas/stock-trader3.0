@@ -6,7 +6,7 @@ export default function StatsCard(props) {
 
         <div className="">
             <Card border="info">
-                <Card.Body className='mt-2'>
+                <Card.Body className='mt-1'>
                     <div className="row d-flex align-items-center">
                         <div className="col" style={{fontSize: "48px"}}>
                             <i className= {`${props.icon}`}></i>
