@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
 
 html {
   position: relative;
-  overflow-x: hidden !important;
+  overflow-x: hidden!important;
 }
 
 * {
@@ -10,12 +10,11 @@ html {
 }
 
 body {
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #324e63;
 }
 
-a,
-a:hover {
+a, a:hover {
   text-decoration: none;
 }
 
@@ -46,15 +45,17 @@ a:hover {
     min-height: 100vh;
     padding-top: 100px;
   }
+
 }
 
 .profile-card {
   width: 100%;
-  //min-height: 460px;
+  min-height: 460px;
   margin: auto;
-  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  box-shadow: 0px 8px 60px -10px rgba(13,28,39,0.6);
   background: #fff;
   border-radius: 12px;
+  //max-width: 700px;
   position: relative;
 
   &.active {
@@ -66,12 +67,12 @@ a:hover {
     .profile-card__overlay {
       opacity: 1;
       pointer-events: auto;
-      transition-delay: 0.1s;
+      transition-delay: .1s;
     }
 
     .profile-card-form {
       transform: none;
-      transition-delay: 0.1s;
+      transition-delay: .1s;
     }
   }
 
@@ -85,9 +86,8 @@ a:hover {
     overflow: hidden;
     position: relative;
     z-index: 4;
-    box-shadow: 0px 5px 50px 0px #1de9b6,
-      0px 0px 0px 7px#1de9b6;
-
+    box-shadow: 0px 5px 50px 0px #1de9b6, 0px 0px 0px 7px #1de9b6;
+    
     @media screen and (max-width: 576px) {
       width: 120px;
       height: 120px;
@@ -100,6 +100,7 @@ a:hover {
       object-fit: cover;
       border-radius: 50%;
     }
+
   }
 
   &__cnt {
@@ -107,7 +108,7 @@ a:hover {
     text-align: center;
     padding: 0 20px;
     padding-bottom: 40px;
-    transition: all 0.3s;
+    transition: all .3s;
   }
 
   &__name {
@@ -127,6 +128,7 @@ a:hover {
       //color: #ff2846;
       font-weight: 700;
     }
+
   }
 
   &-loc {
@@ -142,6 +144,7 @@ a:hover {
       margin-right: 10px;
       //color: #6944ff;
     }
+
   }
 
   &-inf {
@@ -159,6 +162,7 @@ a:hover {
         padding: 10px 20px;
         min-width: 120px;
       }
+
     }
 
     &__title {
@@ -172,6 +176,7 @@ a:hover {
       font-weight: 500;
       margin-top: 7px;
     }
+
   }
 
   &-social {
@@ -191,11 +196,11 @@ a:hover {
       justify-content: center;
       color: #fff;
       background: #405de6;
-      box-shadow: 0px 7px 30px rgba(43, 98, 169, 0.5);
+      box-shadow: 0px 7px 30px rgba(43,98,169,0.5);
       position: relative;
       font-size: 21px;
       flex-shrink: 0;
-      transition: all 0.3s;
+      transition: all .3s;
 
       @media screen and (max-width: 768px) {
         width: 50px;
@@ -203,7 +208,7 @@ a:hover {
         margin: 10px;
       }
 
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 768px){
         &:hover {
           transform: scale(1.2);
         }
@@ -215,20 +220,12 @@ a:hover {
       }
 
       &.twitter {
-        background: linear-gradient(45deg, #1da1f2, #0e71c8);
+        background: linear-gradient(45deg, #1da1f2,#0e71c8);
         box-shadow: 0px 4px 30px rgba(19, 127, 212, 0.7);
       }
 
       &.instagram {
-        background: linear-gradient(
-          45deg,
-          #405de6,
-          #5851db,
-          #833ab4,
-          #c13584,
-          #e1306c,
-          #fd1d1d
-        );
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
         box-shadow: 0px 4px 30px rgba(120, 64, 190, 0.6);
       }
 
@@ -251,11 +248,13 @@ a:hover {
         background: linear-gradient(45deg, #d5135a, #f05924);
         box-shadow: 0px 4px 30px rgba(223, 45, 70, 0.6);
       }
+
     }
 
     .icon-font {
       display: inline-flex;
     }
+
   }
 
   &-ctr {
@@ -267,23 +266,24 @@ a:hover {
     @media screen and (max-width: 576px) {
       flex-wrap: wrap;
     }
+
   }
 
   &__button {
     background: none;
     border: none;
-    font-family: "Quicksand", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     font-size: 19px;
-    margin: none;
-    // padding: 15px 40px;
-    // min-width: 201px;
-    // border-radius: 50px;
-    // min-height: 55px;
+    margin: 15px 35px;
+    padding: 15px 40px;
+    min-width: 201px;
+    border-radius: 50px;
+    min-height: 55px;
     color: #fff;
-    cursor: default;
+    cursor: pointer;
     backface-visibility: hidden;
-    transition: all 0.3s;
+    transition: all .3s;
 
     @media screen and (max-width: 768px) {
       min-width: 170px;
@@ -303,7 +303,7 @@ a:hover {
     }
 
     &:focus {
-      outline: none !important;
+      outline: none!important;
     }
 
     @media screen and (min-width: 768px) {
@@ -321,12 +321,13 @@ a:hover {
     }
 
     &.button--blue {
-      background: linear-gradient(45deg, #1da1f2, #0e71c8);
+      background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
       box-shadow: 0px 4px 30px rgba(19, 127, 212, 0.4);
 
       &:hover {
         box-shadow: 0px 7px 30px rgba(19, 127, 212, 0.75);
       }
+
     }
 
     &.button--orange {
@@ -336,6 +337,7 @@ a:hover {
       &:hover {
         box-shadow: 0px 7px 30px rgba(223, 45, 70, 0.75);
       }
+
     }
 
     &.button--gray {
@@ -343,6 +345,7 @@ a:hover {
       background: #dcdcdc;
       color: #142029;
     }
+
   }
 
   &-message {
@@ -355,7 +358,7 @@ a:hover {
     padding-bottom: 100px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s;
+    transition: all .3s;
   }
 
   &-form {
@@ -367,10 +370,10 @@ a:hover {
     background: #fff;
     border-radius: 10px;
     padding: 35px;
-    transform: scale(0.8);
+    transform: scale(.8);
     position: relative;
     z-index: 3;
-    transition: all 0.3s;
+    transition: all .3s;
 
     @media screen and (max-width: 768px) {
       max-width: 90%;
@@ -388,7 +391,9 @@ a:hover {
       @media screen and (max-width: 576px) {
         flex-wrap: wrap;
       }
+
     }
+
   }
 
   textarea {
@@ -401,26 +406,36 @@ a:hover {
     padding: 15px 20px;
     color: #324e63;
     font-weight: 500;
-    font-family: "Quicksand", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     outline: none;
-    transition: all 0.3s;
+    transition: all .3s;
 
     &:focus {
       outline: none;
       border-color: #8a979e;
     }
+
   }
 
   &__overlay {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 0; 
     left: 0;
     pointer-events: none;
     opacity: 0;
     background: rgba(22, 33, 72, 0.35);
     border-radius: 12px;
-    transition: all 0.3s;
+    transition: all .3s;
   }
+
 }
+
+
+
+
+
+
+
+

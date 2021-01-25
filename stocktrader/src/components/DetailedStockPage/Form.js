@@ -34,7 +34,7 @@ export default function OfferForm(props){
 
     useEffect(() => {
         setMoneyNeeded(Price * Quantity);
-    }, [Price, Quantity, Type])
+    }, [Price, Quantity])
 
     return(
         <Form>

@@ -171,13 +171,24 @@ export default function Chart(props){
     }, [props.symbol])
 
     if (VolumeDataApex.length < 1 && StockDataApex < 1) {
-      return "Loading";
+      return (
+          <div>
+              <img
+                className = "mx-auto d-block"
+                id="loading"
+                src="/candle_loader.gif"
+                alt="loading candle chart"
+                width="70%"
+                height="auto"
+              />
+          </div>
+      );
     } else {
     return(
       
-      <div class="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
-        <h3>Selected: {SelectedInterval}</h3>
-        <ul class="pagination">
+      <div className="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
+        <h3 className="ml-3">Selected: {SelectedInterval}</h3>
+        <ul className="pagination ml-3 mt-3">
           <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval(1)}>1 MIN</button></li>
           <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval(5)}>5 MIN</button></li>
           <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval("D")}>DAY</button></li>
@@ -191,5 +202,5 @@ export default function Chart(props){
       </div>
     );
 
-}
+  }
 }
