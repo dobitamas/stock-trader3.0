@@ -1,7 +1,7 @@
 import React from 'react';
 import Portfolioperformance from './Portfolioperformance';
 import CashStockProfit from './CashStockProfit';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+//import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import StocksTable from './StocksTable';
 import LineChart from './LineChart';
 import Profile from './Profile';
