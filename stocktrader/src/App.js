@@ -128,8 +128,8 @@ function App() {
               <Route exact path="/">
                 <Mainpage />
               </Route>
-              <Route exact path="/stockpage">
-                <Detailedstockpage symbol={"AAPL"} />
+              <Route exact path="/stockpage/:symbol" component={Symbol}>
+                <Detailedstockpage symbol={Symbol} />
               </Route>
             </div>
           </Router>

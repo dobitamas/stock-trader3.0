@@ -22,7 +22,6 @@ export default function StocksTable(){
                                     <Table responsive>
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Amount</th>
                                             <th>Avg price</th>
@@ -37,8 +36,9 @@ export default function StocksTable(){
                         return(
                             <React.Fragment key={i}>
                                 <tr className="tr-shadow">
-                                    <td className="text-center">{object.stock.id}</td>
-                                    <td className="text-center">{object.stock.name}</td>
+                                    <a href={`/stockpage/${object.stock.symbol}`}>
+                                        <td className="text-center">{object.stock.name}</td>
+                                    </a>
                                     <td className="text-center">{object.stockTotalAmount}</td>
                                     <td className="text-center">{`$ ${object.averagePurchasePrice}`}</td>
                                     <td className="text-center">{`$ ${object.totalPurchaseValue}`}</td>

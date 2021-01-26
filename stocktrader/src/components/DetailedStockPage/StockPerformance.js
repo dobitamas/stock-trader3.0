@@ -8,9 +8,15 @@ export default function Portfolioperformance(props) {
     const [StockPerformance, setStockPerformance] = useState({});
 
     useEffect(() => {
+        axios
+                .get(`http://localhost:8080/user/getStockPerformanceList/${props.symbol}`)
+                .then((resp) => {
+                    setStockPerformance(resp.data)
+                    console.log("updating!!!")
+                })
         setInterval(() => {
             axios
-                .get(`http://localhost:8080/user/getStockPerformanceList/${props.stock}`)
+                .get(`http://localhost:8080/user/getStockPerformanceList/${props.symbol}`)
                 .then((resp) => {
                     setStockPerformance(resp.data)
                     console.log("updating!!!")

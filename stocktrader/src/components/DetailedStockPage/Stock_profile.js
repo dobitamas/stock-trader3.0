@@ -15,7 +15,7 @@ export default function StockProfile(props){
 
   useEffect(() => {
     axios 
-      .get(`http://localhost:8080/stock/getstock/${props.stock}`)
+      .get(`http://localhost:8080/stock/getstock/${props.symbol}`)
       .then((resp) =>{ 
           setStockData(resp.data)
         })
@@ -39,6 +39,7 @@ export default function StockProfile(props){
 
   function showFormModal(){
     setisFormModalVisible(true);
+    console.log("FORM MODAL IS VISIBLE");
   }
 
 
@@ -102,7 +103,7 @@ export default function StockProfile(props){
                     <div className="d-flex justify-content-center container">
                       <div className="row">
                         <div className="col-sm">
-                          <button className="profile-card__button button--blue" onClick={_ => showFormModal}>BUY</button>
+                          <button className="profile-card__button button--blue" onClick={showFormModal}>BUY</button>
                         </div>
                         <div className="col-sm">
                           <button className="profile-card__button button--orange">SELL</button>
