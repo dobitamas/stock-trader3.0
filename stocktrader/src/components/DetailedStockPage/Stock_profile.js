@@ -37,6 +37,10 @@ export default function StockProfile(props){
     })
   }
 
+  function showFormModal(){
+    setisFormModalVisible(true);
+  }
+
 
   function OfferModal(props){
     return(
@@ -98,7 +102,7 @@ export default function StockProfile(props){
                     <div className="d-flex justify-content-center container">
                       <div className="row">
                         <div className="col-sm">
-                          <button className="profile-card__button button--blue ">BUY</button>
+                          <button className="profile-card__button button--blue" onClick={_ => showFormModal}>BUY</button>
                         </div>
                         <div className="col-sm">
                           <button className="profile-card__button button--orange">SELL</button>
