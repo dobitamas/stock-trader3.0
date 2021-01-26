@@ -14,19 +14,16 @@ export default function Mainpage(){
                 <div className="col">
                     <div class="card m-3 border border-primary container-fluid" >
                         <h3 style={{textAlign: "center"}}>Portfolio balance</h3>
-                        <div className="row">
-                            <div className="col">
-                                <div className="card m-3 border border-info">
-                                    <Profile />
-                                </div>
+                        <div className="row row-eq-height w-100 mx-auto">
+                            <div className="col ml-5 mr-4 card m-3 border border-info">
+                                <Profile />
                             </div>
-                            <div className="col">
-                                <div style={{textAlign: "right"}}>
-                                    <div className=" card m-3 border border-info">
-                                        <Portfolioperformance />
-                                        <LineChart/>
-                                    </div>
-                                </div>
+                            <div className="col ml-5 mr-4 card m-3 border border-info">
+                                <Portfolioperformance />
+                                <LineChart/>
+                            </div>
+                            <div className="col ml-5 mr-4 card m-3 border border-info" >
+                                <CashStockProfit />
                             </div>
                         </div>
                     </div>

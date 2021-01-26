@@ -13,15 +13,15 @@ export default function Portfolioperformance(props) {
 
     }, [])
     return(
-        <div className="m-3"> 
+        <div className="w-100"> 
             <StatsCard
                 label={"Total value"}
-                amount={`$ ${Performance.portfolioTotalValue}`}
-                icon={"las la-money-bill-wave font-large-3 float-left"}
+                amount={`${Performance.portfolioTotalValue}`}
+                icon={"las la-money-bill-wave float-left"}
             />
             <StatsCard
                 label={"Total stock value"}
-                amount={`$ ${Performance.portfolioTotalStockValue}`}
+                amount={`${Performance.portfolioTotalStockValue}`}
                 icon={"las la-chart-line font-large-3 float-left"}
             />
         </div>

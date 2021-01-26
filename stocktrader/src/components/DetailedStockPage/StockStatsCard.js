@@ -13,7 +13,7 @@ export default function StatsCard(props) {
                         </div>
                         <div className="col">
                             <h5 className="f-w-300 font-weight-bold">{props.amount}</h5>
-                            <h8><span className="d-block text-uppercase" style={{fontSize: "10px"}}>{props.label}</span></h8>
+                            <h6><span className="d-block text-uppercase" style={{fontSize: "10px"}}>{props.label}</span></h6>
                         </div>
                     </div>
                 </Card.Body>
