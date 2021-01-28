@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
+import axios from 'axios';
 
 
 export default function Chart(props){
@@ -141,8 +142,8 @@ export default function Chart(props){
 
 
     useEffect(() => {
-        const axios = require('axios');
-        axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
+        //const axios = require('axios');
+        axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
             setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
@@ -168,8 +169,36 @@ export default function Chart(props){
             console.log(resp.data)
 
           })
+
+          setInterval(() => {
+            axios
+                .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
+                .then((resp) => {
+                  setStockData1(resp.data.reactCandle1.reactCandleDataList)
+                  setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
+                  setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
+                  setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
+                  console.log("updating 1 minute!!!")
+                })
+        }, 10000)
+
+        setInterval(() => {
+          axios
+              .get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
+              .then((resp) => {
+                setStockData5(resp.data.reactCandle5.reactCandleDataList)
+                setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)
+                setMinDate5(resp.data.reactCandle5.reactCandleDataList[0].x)
+                setMaxDate5(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
+                console.log("updating 5 minute!!!")
+              })
+      }, 15000)
+
+        
     }, [props.symbol])
 
+
+    
     if (VolumeDataApex.length < 1 && StockDataApex < 1) {
       return (
           <div>
