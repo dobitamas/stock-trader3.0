@@ -33,7 +33,7 @@ export default function Offers(props){
                 setOffers(resp.data);
                 //setCash(resp.data.cash);
             }) 
-    }, [])
+    }, [props.symbol])
 
     function DeleteOffer(id){
         axios

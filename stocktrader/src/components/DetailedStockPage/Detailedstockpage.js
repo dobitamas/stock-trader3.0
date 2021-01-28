@@ -7,7 +7,7 @@ import StockProfile from './StockProfile';
 import StockPerformance from './StockPerformance';
 import {useParams} from 'react-router-dom';
 
-export default function Detailedstockpage(props){
+export default function Detailedstockpage(){
     let {symbol} = useParams();
     
     return(

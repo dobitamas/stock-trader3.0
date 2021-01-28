@@ -17,7 +17,7 @@ export default function StockProfile(props){
       .get(`http://localhost:8080/stock/getstock/${props.symbol}`)
       .then((resp) =>{
           setStockData(resp.data)
-          setStockList(oldArray => [...oldArray, props.symbol])
+          setStockList(StockList => [...StockList, props.symbol])
         })
   }, [])
 
@@ -88,10 +88,10 @@ export default function StockProfile(props){
                     <div className="d-flex justify-content-center container">
                       <div className="row">
                         <div className="col-sm">
-                          <button className="profile-card__button button--blue" onClick={showFormModal("BUY")}>BUY</button>
+                          <button className="profile-card__button button--blue" onClick={_ => showFormModal("BUY")}>BUY</button>
                         </div>
                         <div className="col-sm">
-                          <button className="profile-card__button button--orange" onClick={showFormModal("SELL")}>SELL</button>
+                          <button className="profile-card__button button--orange" onClick={_ => showFormModal("SELL")}>SELL</button>
                         </div>
                     </div>
                       </div>

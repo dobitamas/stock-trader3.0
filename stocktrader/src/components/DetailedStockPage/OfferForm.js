@@ -18,7 +18,7 @@ export default function OfferForm(props){
             setType(props.type)
         }
         getStockDataForOffer();
-    }, [])
+    }, [Stock, props.symbol])
 
 
     function placeOffer() {
@@ -29,7 +29,7 @@ export default function OfferForm(props){
 
     function getStockDataForOffer() {
         axios
-            .get(`http://localhost:8080/user/getStockPerformance/${Stock}`)
+            .get(`http://localhost:8080/user/getStockDataForOffer/${Stock}`)
             .then((resp) => {
                 setQuantity(resp.data.stockQuantity);
                 setCashAvailable(resp.data.availableCash);
@@ -42,16 +42,16 @@ export default function OfferForm(props){
         setMoneyNeeded(Price * Quantity);
     }, [Price, Quantity])
 
-    return(
+    return( 
         <Form>
             <Row>
                 <Col>
-                    <Form.Group controlId="stock">
+                    <Form.Group>
                         <Form.Label>Select your stock</Form.Label>
-                            <Form.Control as="select" onChange={e => {setStock(e.target.value); getStockDataForOffer()}} required>
+                            <Form.Control as="select" onSelect={e => {setStock(e.target.value)}} required value={Stock}>
                                 {StockList.map( (stock) => {
                                     return (
-                                            <option value={stock.symbol}>Tesla</option>
+                                            <option value={stock.symbol}>{Stock}</option>
                                         )
                                     }
                                     )
@@ -92,8 +92,8 @@ export default function OfferForm(props){
                     <Button type="submit" onClick={placeOffer}>Submit offer</Button>
                 </Col>
                 <Col>
-                    {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}
-                    {Type==="SELL"? <h3>Number: {props.available}</h3> : <p></p>}
+                    {Type==="BUY"? <h3>You have:{`$ ${CashAvailable}`}</h3> : <p></p>}
+                    {Type==="SELL"? <h3>Number: {Quantity}</h3> : <p></p>}
                 </Col>
                 <Col>
                     {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
