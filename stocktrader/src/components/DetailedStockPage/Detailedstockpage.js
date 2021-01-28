@@ -3,7 +3,7 @@ import StocksTable from '../MainPage/StocksTable';
 import Chart from './Chart';
 import Offers from './Offers';
 import Stockcard from './Stockcard';
-import StockProfile from './Stock_profile';
+import StockProfile from './StockProfile';
 import StockPerformance from './StockPerformance';
 import {useParams} from 'react-router-dom';
 

@@ -9,20 +9,37 @@ export default function Portfolioperformance(props) {
 
     useEffect(() => {
         axios
-                .get(`http://localhost:8080/user/getStockPerformanceList/${props.symbol}`)
+                .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
                 .then((resp) => {
                     setStockPerformance(resp.data)
-                    console.log("updating!!!")
+                    console.log("getStockPerfomanceList")
+                    console.log(resp.data)
                 })
         setInterval(() => {
             axios
-                .get(`http://localhost:8080/user/getStockPerformanceList/${props.symbol}`)
+                .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
                 .then((resp) => {
                     setStockPerformance(resp.data)
                     console.log("updating!!!")
                 })
         }, 20000)
     }, [])
+
+
+    if (StockPerformance == null) {
+        return (
+            <div>
+                <img
+                  className = "mx-auto d-block"
+                  id="loading"
+                  src="/candle_loader.gif"
+                  alt="loading candle chart"
+                  width="70%"
+                  height="auto"
+                />
+            </div>
+        );
+      } else {
     return(
         <div class="container w-100">
             <div class="col align-self-center">
@@ -61,4 +78,5 @@ export default function Portfolioperformance(props) {
             </div>
         </div>
       )
+    }
 }

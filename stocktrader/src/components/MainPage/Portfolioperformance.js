@@ -7,23 +7,37 @@ export default function Portfolioperformance(props) {
     const [Performance, setPerformance] = useState({});
 
     useEffect(() => {
-        axios
-            .get("http://localhost:8080/user/getportfolioperformance")
-            .then((resp) => setPerformance(resp.data));
+        setPerformance(props.portfolioPerformance_Portfolioperformance)
 
     }, [])
-    return(
-        <div className="w-100"> 
-            <StatsCard
-                label={"Total value"}
-                amount={`${Performance.portfolioTotalValue}`}
-                icon={"las la-money-bill-wave float-left"}
-            />
-            <StatsCard
-                label={"Total stock value"}
-                amount={`${Performance.portfolioTotalStockValue}`}
-                icon={"las la-chart-line font-large-3 float-left"}
-            />
-        </div>
-      )
+
+    if (Performance === null) {
+        return (
+            <div>
+                <img
+                  className = "mx-auto d-block"
+                  id="loading"
+                  src="/candle_loader.gif"
+                  alt="loading candle chart"
+                  width="70%"
+                  height="auto"
+                />
+            </div>
+        );
+      } else {
+        return(
+            <div className="w-100"> 
+                <StatsCard
+                    label={"Total value"}
+                    amount={`${Performance.portfolioTotalValue}`}
+                    icon={"las la-money-bill-wave float-left"}
+                />
+                <StatsCard
+                    label={"Total stock value"}
+                    amount={`${Performance.portfolioTotalStockValue}`}
+                    icon={"las la-chart-line font-large-3 float-left"}
+                />
+            </div>
+        )
+      }
 }
