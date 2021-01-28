@@ -7,37 +7,22 @@ import OfferForm from '../DetailedStockPage/OfferForm';
 
 export default function StockProfile(props){
   const [StockData, setStockData] = useState({});
-  const [Cash, setCash] = useState(0);
-  const [Available, setAvailable] = useState(0);
-  const [AccData, setAccData] = useState({});
+  const [StockList, setStockList] = useState([]);
+  const [Type, setType] = useState("");
   const [isFormModalVisible, setisFormModalVisible] = useState(false);
 
 
   useEffect(() => {
     axios 
       .get(`http://localhost:8080/stock/getstock/${props.symbol}`)
-      .then((resp) =>{ 
+      .then((resp) =>{
           setStockData(resp.data)
+          setStockList(oldArray => [...oldArray, props.symbol])
         })
-
-    axios
-        .get('http://localhost:8080/user/getuseraccount')
-        .then((resp) => {
-          setAccData(resp.data)
-          setCash(resp.data.cash)
-        });
-      
   }, [])
 
-  const getNumberOfStocks = (symbol) => {
-    AccData.stockPerformanceList.map((object) => {
-      if(object.stock.symbol === symbol){
-        setAvailable(object.stockTotalAmount);
-      }
-    })
-  }
-
-  function showFormModal(){
+  function showFormModal(type){
+    setType(type);
     setisFormModalVisible(true);
     console.log("FORM MODAL IS VISIBLE");
   }
@@ -57,7 +42,7 @@ export default function StockProfile(props){
               </Modal.Title>
             </Modal.Header>
               <Modal.Body>
-                <OfferForm cash={Cash} available={Available} getNumber={getNumberOfStocks} />
+                <OfferForm stockList={StockList} type={Type}/>
               </Modal.Body>
             <Modal.Footer>
               <Button onClick={props.onHide}>Close</Button>
@@ -103,10 +88,10 @@ export default function StockProfile(props){
                     <div className="d-flex justify-content-center container">
                       <div className="row">
                         <div className="col-sm">
-                          <button className="profile-card__button button--blue" onClick={showFormModal}>BUY</button>
+                          <button className="profile-card__button button--blue" onClick={showFormModal("BUY")}>BUY</button>
                         </div>
                         <div className="col-sm">
-                          <button className="profile-card__button button--orange">SELL</button>
+                          <button className="profile-card__button button--orange" onClick={showFormModal("SELL")}>SELL</button>
                         </div>
                     </div>
                       </div>

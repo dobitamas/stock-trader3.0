@@ -3,24 +3,40 @@ import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 
 export default function OfferForm(props){
+    const [StockList, setStockList] = useState([]);
     const [Stock, setStock] = useState("");
-    const [Type, setType] = useState("");
+    const [Type, setType] = useState("CHOOSE TYPE");
     const [Price, setPrice] = useState(0);
     const [Quantity, setQuantity] = useState(0);
+    const [CashAvailable, setCashAvailable] = useState(0);
     const [MoneyNeeded, setMoneyNeeded] = useState(0);
 
+    useEffect(() => {
+        setStockList(props.stockList)
+        setStock(props.stockList[0])
+        if (props.type !== ""){
+            setType(props.type)
+        }
+        getStockDataForOffer();
+    }, [])
 
-    function changeType(type){
-        props.getNumber(Stock);
-        setType(type);
-    }
 
-
-    function SendApi() {
+    function placeOffer() {
         axios
             .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));
     }
+
+    function getStockDataForOffer() {
+        axios
+            .get(`http://localhost:8080/user/getStockPerformance/${Stock}`)
+            .then((resp) => {
+                setQuantity(resp.data.stockQuantity);
+                setCashAvailable(resp.data.availableCash);
+            });
+    }
+
+
 
     useEffect(() => {
         setMoneyNeeded(Price * Quantity);
@@ -32,18 +48,21 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controlId="stock">
                         <Form.Label>Select your stock</Form.Label>
-                            <Form.Control as="select" onChange={e => setStock(e.target.value)} required>
-                                <option>Stock</option>
-                                <option value={"TSLA"}>Tesla</option>
-                                <option value={"AAPL"}>Apple</option>
+                            <Form.Control as="select" onChange={e => {setStock(e.target.value); getStockDataForOffer()}} required>
+                                {StockList.map( (stock) => {
+                                    return (
+                                            <option value={stock.symbol}>Tesla</option>
+                                        )
+                                    }
+                                    )
+                                }
                             </Form.Control>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group controlId="type">
                         <Form.Label>Select action</Form.Label>
-                            <Form.Control as="select" onChange={e => changeType(e.target.value)} required>
-                                <option>Type</option>
+                            <Form.Control as="select" onChange={e => setType(e.target.value)} value={Type} required>
                                 <option value={"BUY"}>Buy</option>
                                 <option value={"SELL"}>Sell</option>
                             </Form.Control>
@@ -70,7 +89,7 @@ export default function OfferForm(props){
             </Row>
             <Row>
                 <Col>
-                    <Button type="submit" onClick={SendApi}>Submit offer</Button>
+                    <Button type="submit" onClick={placeOffer}>Submit offer</Button>
                 </Col>
                 <Col>
                     {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}

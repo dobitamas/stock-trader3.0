@@ -84,7 +84,7 @@ export default function Offers(props){
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <OfferForm cash={Cash} available={Available} getNumber={getNumberOfStocks} />
+        <OfferForm />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -98,10 +98,10 @@ export default function Offers(props){
         return(
             <Modal
             {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Edit your offer
