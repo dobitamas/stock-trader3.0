@@ -8,23 +8,23 @@ export default function Portfolioperformance(props) {
     const [StockPerformance, setStockPerformance] = useState({});
 
     useEffect(() => {
-        axios
-                .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
-                .then((resp) => {
-                    setStockPerformance(resp.data)
-                    console.log("getStockPerfomanceList")
-                    console.log(resp.data)
-                })
+        ApiCall();
         setInterval(() => {
-            axios
-                .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
-                .then((resp) => {
-                    setStockPerformance(resp.data)
-                    console.log("updating!!!")
-                })
+            ApiCall();
         }, 20000)
+
     }, [])
 
+
+    function ApiCall() {
+        axios
+            .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
+            .then((resp) => {
+                setStockPerformance(resp.data)
+                console.log("getStockPerfomanceList")
+                console.log(resp.data)
+            })
+    }
 
     if (StockPerformance == null) {
         return (

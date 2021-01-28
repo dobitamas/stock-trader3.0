@@ -142,6 +142,7 @@ export default function Chart(props){
 
 
     useEffect(() => {
+      console.log("USE EFFECT RUNS")
         //const axios = require('axios');
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}`)
           .then((resp) => {
@@ -178,7 +179,7 @@ export default function Chart(props){
                   setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
                   setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
                   setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
-                  console.log("updating 1 minute!!!")
+                  console.log(`updating 1 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
                 })
         }, 10000)
 
@@ -190,7 +191,7 @@ export default function Chart(props){
                 setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)
                 setMinDate5(resp.data.reactCandle5.reactCandleDataList[0].x)
                 setMaxDate5(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
-                console.log("updating 5 minute!!!")
+                console.log(`updating 5 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
               })
       }, 15000)
 
