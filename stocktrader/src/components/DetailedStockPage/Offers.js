@@ -3,12 +3,12 @@ import axios from "axios";
 import './Offers.css';
 import dayjs from "dayjs";
 import {Modal, Button} from 'react-bootstrap';
-import OfferForm from './Form';
+import OfferForm from './OfferForm';
 import EditForm from './EditForm';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 
 
-export default function OfferTable(props){
+export default function Offers(props){
     const [Offers, setOffers] = useState([]);
     const [isFormModalVisible, setisFormModalVisible] = useState(false);
     const [isEditModalVisible, setisEditModalVisible] = useState(false);
@@ -28,11 +28,11 @@ export default function OfferTable(props){
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/user/getuseraccount`)
+            .get(`http://localhost:8080/user/getoffers/${props.symbol}`)
             .then((resp) =>{
-                setOffers(resp.data.offers);
-                setCash(resp.data.cash)
-            })
+                setOffers(resp.data);
+                //setCash(resp.data.cash);
+            }) 
     }, [])
 
     function DeleteOffer(id){
@@ -70,6 +70,7 @@ export default function OfferTable(props){
     }
 
     function OfferModal(props){
+
         return(
             <Modal
             {...props}
@@ -127,14 +128,14 @@ export default function OfferTable(props){
         show={isEditModalVisible}
         onHide={() => hideEditModal}
         />
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
-                                            <i class="zmdi zmdi-plus"></i>Add item</button>
-                                    </div>
-                                </div>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+            </div>
+            <div class="table-data__tool-right">
+                <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
+                    <i class="zmdi zmdi-plus"></i>Add item</button>
+            </div>
+        </div>
         <div className="table-responsive table-responsive-data2 mx-auto">
           <table className="table table-data2">
             <thead>

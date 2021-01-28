@@ -17,16 +17,6 @@ export default function OfferForm(props){
 
 
     function SendApi() {
-        if(Stock === ""){
-            return(<Alert variant="danger">Select stock!</Alert>)
-        } else if(Type === "") {
-            return(<Alert variant="danger">Choose offer type!</Alert>)
-        } else if(Price === 0) {
-            return(<Alert variant="danger">Set the price!</Alert>)
-        } else if(Quantity === 0) {
-            return(<Alert variant="danger">Set quantity!</Alert>)
-        }
-
         axios
             .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));

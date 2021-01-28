@@ -17,16 +17,6 @@ export default function EditForm(props){
 
 
     function SendApi() {
-        if(Stock === ""){
-            alert(<Alert variant="danger">Select stock!</Alert>)
-        } else if(Type === "") {
-            alert(<Alert variant="danger">Choose offer type!</Alert>)
-        } else if(Price === 0) {
-            alert(<Alert variant="danger">Set the price!</Alert>)
-        } else if(Quantity === 0) {
-            alert(<Alert variant="danger">Set quantity!</Alert>)
-        }
-
         axios
             .post(`http://localhost:8080/user/replaceoffer/${props.id}/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));

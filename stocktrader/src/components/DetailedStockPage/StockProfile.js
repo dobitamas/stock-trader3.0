@@ -3,7 +3,7 @@ import axios from "axios";
 import DayJS from "react-dayjs";
 import dayjs from 'dayjs';
 import {Modal, Button} from 'react-bootstrap';
-import OfferForm from '../DetailedStockPage/Form';
+import OfferForm from '../DetailedStockPage/OfferForm';
 
 export default function StockProfile(props){
   const [StockData, setStockData] = useState({});
