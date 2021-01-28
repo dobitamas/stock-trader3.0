@@ -12,15 +12,21 @@ export default function Mainpage(){
     const [PortfolioPerformance, setPortfolioPerformance] = useState({});
 
     useEffect(() => {
+        getPortfolioPerformance()
+        setInterval(() => {
+            getPortfolioPerformance()
+        }, 10000)
+    }, [])
+
+    
+    function getPortfolioPerformance() {
         axios
             .get("http://localhost:8080/user/getportfolioperformance")
             .then((resp) => {
                 setPortfolioPerformance(resp.data)
-                console.log("MAINPAGE INCOMING: ")
-                console.log(resp.data)
             }
             );
-    }, [])
+    }
 
     if (Object.keys(PortfolioPerformance).length === 0) {
         return (

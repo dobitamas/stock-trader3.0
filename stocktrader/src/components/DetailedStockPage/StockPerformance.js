@@ -8,15 +8,15 @@ export default function Portfolioperformance(props) {
     const [StockPerformance, setStockPerformance] = useState({});
 
     useEffect(() => {
-        ApiCall();
+        getStockPerformance();
         setInterval(() => {
-            ApiCall();
+            getStockPerformance();
         }, 20000)
 
     }, [])
 
 
-    function ApiCall() {
+    function getStockPerformance() {
         axios
             .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
             .then((resp) => {
