@@ -77,13 +77,13 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired quantity</Form.Label>
-                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} required/>
+                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} required min={0}/>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired price in $</Form.Label>
-                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} required/>
+                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} required min={0}/>
                     </Form.Group>
                 </Col>
             </Row>

@@ -58,13 +58,13 @@ export default function EditForm(props){
                 <Col>
                     <Form.Group controllId="quantity">
                             <Form.Label>Desired quantity</Form.Label>
-                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} value={Quantity} required/>
+                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} value={Quantity} required min={0}/>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired price in $</Form.Label>
-                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} value={Price} required/>
+                            <Form.Control type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} value={Price} required min={0}/>
                     </Form.Group>
                 </Col>
             </Row>
