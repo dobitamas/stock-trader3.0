@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from 'react';
+import useInterval from 'react-useinterval';
 import ReactApexChart from 'react-apexcharts';
 import axios from 'axios';
 
 
 export default function Chart(props){
-    const [SelectedInterval, setSelectedInterval] = useState(1);
+    const [SelectedInterval, setSelectedInterval] = useState(5);
     const [StockDataApex, setStockDataApex] = useState([]);
     const [StockData1, setStockData1] = useState([]);
     const [StockData5, setStockData5] = useState([]);
@@ -142,8 +143,6 @@ export default function Chart(props){
 
 
     useEffect(() => {
-      console.log("USE EFFECT RUNS")
-        //const axios = require('axios');
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
@@ -167,38 +166,41 @@ export default function Chart(props){
             
             setStockDataApex(resp.data.reactCandle1.reactCandleDataList)
             setVolumeDataApex(resp.data.reactCandle1.reactVolumeDataList)
-            console.log(resp.data)
+
+            setSelectedInterval(1)
 
           })
+    }, [])
 
-          setInterval(() => {
-            axios
-                .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
-                .then((resp) => {
-                  setStockData1(resp.data.reactCandle1.reactCandleDataList)
-                  setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
-                  setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
-                  setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
-                  console.log(`updating 1 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
-                })
-        }, 10000)
+    useInterval(() => {
+        axios
+            .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
+            .then((resp) => {
+              setStockData1(resp.data.reactCandle1.reactCandleDataList)
+              setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
+              setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
+              setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
+              if (SelectedInterval === 1){
+                ChangeInterval(1)
+              }
+              console.log(`updating 1 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
+            })
+    }, 10000);
 
-        setInterval(() => {
-          axios
-              .get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
-              .then((resp) => {
-                setStockData5(resp.data.reactCandle5.reactCandleDataList)
-                setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)
-                setMinDate5(resp.data.reactCandle5.reactCandleDataList[0].x)
-                setMaxDate5(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
-                console.log(`updating 5 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
-              })
-      }, 15000)
-
-        
-    }, [props.symbol])
-
-
+    useInterval(() => {     
+        axios
+            .get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
+            .then((resp) => {
+              setStockData1(resp.data.reactCandle5.reactCandleDataList)
+              setVolumeData1(resp.data.reactCandle5.reactVolumeDataList)
+              setMinDate1(resp.data.reactCandle5.reactCandleDataList[0].x)
+              setMaxDate1(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
+              if (SelectedInterval === 5){
+                ChangeInterval(5)
+              }
+              console.log(`updating 5 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
+            })
+    }, 17000);
     
     if (VolumeDataApex.length < 1 && StockDataApex < 1) {
       return (

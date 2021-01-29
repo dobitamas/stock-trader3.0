@@ -11,7 +11,7 @@ export default function Portfolioperformance(props) {
         getStockPerformance();
         setInterval(() => {
             getStockPerformance();
-        }, 20000)
+        }, 10000)
 
     }, [])
 

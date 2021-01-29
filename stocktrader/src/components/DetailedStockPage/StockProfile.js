@@ -68,10 +68,12 @@ export default function StockProfile(props){
 
     return(
             <div>
+              
               <OfferModal 
                 show={isFormModalVisible}
                 onHide={() => setisFormModalVisible(false)}
                 />
+
                 <div className="">
                   <div className="profile-card__img">
                     <img src={StockData.logo} alt="profile card" />
