@@ -9,7 +9,7 @@ export default function Portfolioperformance(props) {
     useEffect(() => {
         setPerformance(props.portfolioPerformance_Portfolioperformance)
 
-    }, [])
+    }, [props.portfolioPerformance_Portfolioperformance])
 
     if (Performance === null) {
         return (

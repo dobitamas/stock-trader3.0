@@ -6,10 +6,8 @@ export default function CashStockProfit(props) {
     const [Performance, setPerformance] = useState({});
 
     useEffect(() => {
-        console.log("CashStockProfit incoming: ")
-        console.log(props.portfolioPerformance)
         setPerformance(props.portfolioPerformance_CashStockProfit)
-    }, [])
+    }, [props.portfolioPerformance_CashStockProfit])
 
     if (Performance === null) {
         return (

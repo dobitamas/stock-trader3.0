@@ -9,7 +9,7 @@ export default function LineChart(props){
 
     useEffect(() => {
         setPerformance(props.portfolioPerformance_LineChart)
-    }, [])
+    }, [props.portfolioPerformance_LineChart])
 
     if (Performance === null) {
         return (
