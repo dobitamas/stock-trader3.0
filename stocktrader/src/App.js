@@ -6,6 +6,7 @@ import '../src/scss/custom.scss';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Mainpage from './components/MainPage/Mainpage';
 import Detailedstockpage from './components/DetailedStockPage/Detailedstockpage';
+import StockList from './components/StockListPage/StockList';
 
 function App() {
   useEffect(() => {
@@ -43,9 +44,9 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/stockpage" >
+                <a className="nav-link" href="/stocks" >
                   <span data-feather="file" ></span>
-                  Stockpage
+                  Stocks
                 </a>
               </li>
               <li className="nav-item">
@@ -130,6 +131,9 @@ function App() {
               </Route>
               <Route exact path="/stockpage/:symbol" component={Symbol}>
                 <Detailedstockpage symbol={Symbol} />
+              </Route>
+              <Route exact path="/stocks">
+                <StockList />
               </Route>
             </div>
           </Router>
