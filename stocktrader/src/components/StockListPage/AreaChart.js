@@ -3,11 +3,27 @@ import ReactApexChart from 'react-apexcharts';
 import useInterval from 'react-useinterval';
 import axios from 'axios';
 
-export default function AreaChart() {
+export default function AreaChart(props) {
+    const [Series, setSeries] = useState([]);
+    const [Dates, setDates] = useState([]);
+
+    function GetData(){
+      setDates([1, 2, 3]);
+      setSeries([1,3,2]);
+    }
+
+    useEffect(() => {
+      GetData();
+    }, [props.symbol])
+
+    useInterval(() => {
+      GetData();
+      console.log('UPDATING 10 SECS')
+    }, 10000);
 
     const series = [{
-        name: "STOCK ABC",
-        data: [1,3,2]
+        name: "Value",
+        data: Series
     }];
 
     const options = {
@@ -16,6 +32,9 @@ export default function AreaChart() {
             height: 350,
             zoom: {
               enabled: false
+            },
+            toolbar: {
+              show: false
             }
           },
           dataLabels: {
@@ -24,33 +43,28 @@ export default function AreaChart() {
           stroke: {
             curve: 'smooth'
           },
-          
-          title: {
-            text: 'Fundamental Analysis of Stocks',
-            align: 'left'
-          },
-          subtitle: {
-            text: 'Price Movements',
-            align: 'left'
-          },
-          labels: ["label1", "label2", "label3"], 
+          labels: Dates, 
           xaxis: {
-            type: 'category',
+            labels: {
+              show: false
+            }
           },
           yaxis: {
-            opposite: true
+            type: 'disable',
+            show: false,
+            showAlways: false,
           },
           legend: {
             horizontalAlign: 'left'
-          }
+          },
       };
   
 
 
 
     return (
-        <div>
-            <ReactApexChart options={options} series={series} type="area" height={350} />
+        <div className="border">
+            <ReactApexChart options={options} series={series} type="area" height={350} /> 
         </div>
     )
 }

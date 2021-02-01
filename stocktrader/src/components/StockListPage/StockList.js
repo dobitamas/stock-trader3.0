@@ -49,17 +49,17 @@ export default function StockList() {
                                     <h4 class="card-title">{symbol.stock.name}</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
                                     <StatsCard 
-                                        label={"Total value"}
+                                        label={"Current price"}
                                         amount={`100`}
                                         icon={"las la-money-bill-wave float-left"} 
                                     />
                                     <StatsCard 
-                                        label={"Total value"}
+                                        label={"Change"}
                                         amount={`-100`}
                                         icon={"las la-money-bill-wave float-left"} 
                                     />
                                     <AreaChart />
-                                    <a href="http://localhost:3000/" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
