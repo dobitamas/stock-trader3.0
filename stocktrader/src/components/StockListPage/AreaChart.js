@@ -7,19 +7,26 @@ export default function AreaChart(props) {
     const [Series, setSeries] = useState([]);
     const [Dates, setDates] = useState([]);
 
+    /*
     function GetData(){
+
       setDates([1, 2, 3]);
       setSeries([1,3,2]);
     }
+    */
 
     useEffect(() => {
-      GetData();
-    }, [props.symbol])
+      setSeries(props.series);
+      setDates(props.dates);
+    }, [])
 
+    /*
     useInterval(() => {
       GetData();
       console.log('UPDATING 10 SECS')
     }, 10000);
+
+    */
 
     const series = [{
         name: "Value",
@@ -29,7 +36,6 @@ export default function AreaChart(props) {
     const options = {
         chart: {
             type: 'area',
-            height: 350,
             zoom: {
               enabled: false
             },
@@ -45,8 +51,10 @@ export default function AreaChart(props) {
           },
           labels: Dates, 
           xaxis: {
+            type: 'datetime',
             labels: {
-              show: false
+              show: false,
+              format: 'dd/MMM/yy'
             }
           },
           yaxis: {
@@ -64,7 +72,7 @@ export default function AreaChart(props) {
 
     return (
         <div className="border">
-            <ReactApexChart options={options} series={series} type="area" height={350} /> 
+            <ReactApexChart options={options} series={series} type="area" height={'100%'}/> 
         </div>
     )
 }

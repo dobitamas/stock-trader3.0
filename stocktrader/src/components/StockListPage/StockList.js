@@ -5,14 +5,14 @@ import StatsCard from '../MainPage/StatsCard';
 import AreaChart from './AreaChart.js';
 
 export default function StockList() {
-    const [Symbols, setSymbols] = useState([]);
+    const [AllStockData, setAllStockData] = useState([]);
 
     function getAllStockData() {
         axios
-            .get(`http://localhost:8080/stock/getAllLastPrice`)
+            .get(`http://localhost:8080/stock/getStockListData`)
             .then((resp) => {
                 console.log(resp.data);
-                setSymbols(resp.data)
+                setAllStockData(resp.data)
             }
             );
     }
@@ -21,7 +21,7 @@ export default function StockList() {
         getAllStockData();
     }, [])
 
-    if (Symbols.length === 0) {
+    if (AllStockData.length === 0) {
         return (
             <div>
                 <img
@@ -37,29 +37,29 @@ export default function StockList() {
       } else {
     return (
         <div className="container-fluid">
-            <div class="row">
-            {Symbols.map((symbol) => {
+            <div className="row">
+            {AllStockData.map((symbol) => {
                 return( 
                     <React.Fragment>
                                         
-                        <div class="col-xs-12 col-sm-6 col-md-4">  
+                        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto row row-eq-height">  
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class="img-fluid rounded-circle" src="https://w7.pngwing.com/pngs/664/673/png-transparent-apple-logo-iphone-computer-apple-logo-company-heart-logo-thumbnail.png" alt="card"></img></p>
+                                    <p><img class="img-fluid rounded-circle" src={symbol.stock.logo} alt="card"></img></p>
                                     <h4 class="card-title">{symbol.stock.name}</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
                                     <StatsCard 
                                         label={"Current price"}
-                                        amount={`100`}
+                                        amount={symbol.currentPrice}
                                         icon={"las la-money-bill-wave float-left"} 
                                     />
                                     <StatsCard 
                                         label={"Change"}
-                                        amount={`-100`}
+                                        amount={symbol.priceChange}
                                         icon={"las la-money-bill-wave float-left"} 
                                     />
-                                    <AreaChart />
-                                    <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <AreaChart series={symbol.historicalPrices} dates={symbol.dates}/>
+                                    <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm"><i class="fa fa-line-chart">  DETAILS</i></a>
                                 </div>
                             </div>
                         </div>

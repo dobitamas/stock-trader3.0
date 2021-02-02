@@ -32,18 +32,10 @@ export default function LineChart(props){
                         <h3 style={{textAlign:"center"}}>Cash/Stock rate</h3>
                     </Card.Header>
                     <Card.Body>
-                        <div className="row d-flex align-items-center">
-                            <div className="col-9">
-                                <h5 className="f-w-300 d-flex align-items-center m-b-0">{`${Performance.percentageCashValue} %`}</h5>
-                            </div>
-
-                            <div className="col-3 text-right">
-                                <h5 className="f-w-300 d-flex align-items-center m-b-0">{`${Performance.percentageStockValue} %`}</h5>
-                            </div>
-                        </div>
-                        <div className="progress m-t-30" style={{height: '7px'},{maxWidth: "100"}}>
-                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: `${Performance.percentageCashValue}%`}} aria-valuemin="0" aria-valuemax="100"/>
-                        </div>
+                    <div className="progress" style={{height:"2rem"}}>
+                        <div className="progress-bar bg-success" style={{width: `${Performance.percentageCashValue}%`}} role="progressbar" aria-valuenow={Performance.percentageCashValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageCashValue}</div>
+                        <div className="progress-bar" style={{width: `${Performance.percentageStockValue}%`}} role="progressbar" aria-valuenow={Performance.percentageStockValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageStockValue}</div>
+                    </div>  
                     </Card.Body>
                 </Card>
             </div>
