@@ -79,7 +79,7 @@ export default function EditForm(props){
                         {Type==="SELL"? <h3>Number: <br /> {<NumberFormat value={props.available} displayType={'text'} thousandSeparator={true} suffix={"pcs"}/>}</h3> : <p></p>}
                     </Col>
                     <Col>
-                        {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
+                        {Type==="BUY"? <h3>You need: {<NumberFormat value={MoneyNeeded} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
                         {Type==="SELL"? <h3>You will get: <br /> {<NumberFormat value={MoneyWorth} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
                     </Col>
                 </Row> 
