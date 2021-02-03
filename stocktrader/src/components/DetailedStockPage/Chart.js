@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
+import useInterval from 'react-useinterval';
 import axios from 'axios';
 
 
@@ -142,8 +143,6 @@ export default function Chart(props){
 
 
     useEffect(() => {
-      console.log("USE EFFECT RUNS")
-        //const axios = require('axios');
         axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
@@ -170,7 +169,7 @@ export default function Chart(props){
             console.log(resp.data)
 
           })
-
+          /*
           setInterval(() => {
             axios
                 .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
@@ -194,9 +193,39 @@ export default function Chart(props){
                 console.log(`updating 5 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
               })
       }, 15000)
-
+      */
         
-    }, [props.symbol])
+    }, [])
+
+    useInterval(() => {
+      axios
+          .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
+          .then((resp) => {
+            setStockData1(resp.data.reactCandle1.reactCandleDataList)
+            setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
+            setMinDate1(resp.data.reactCandle1.reactCandleDataList[0].x)
+            setMaxDate1(resp.data.reactCandle1.reactCandleDataList[(resp.data.reactCandle1.reactCandleDataList.length)-1].x)
+            if (SelectedInterval === 1){
+              ChangeInterval(1)
+            }
+            console.log(`updating 1 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
+          })
+  }, 10000);
+
+  useInterval(() => {     
+      axios
+          .get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
+          .then((resp) => {
+            setStockData5(resp.data.reactCandle5.reactCandleDataList)
+            setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)
+            setMinDate5(resp.data.reactCandle5.reactCandleDataList[0].x)
+            setMaxDate5(resp.data.reactCandle5.reactCandleDataList[(resp.data.reactCandle5.reactCandleDataList.length)-1].x)
+            if (SelectedInterval === 5){
+              ChangeInterval(5)
+            }
+            console.log(`updating 5 minute!!! ${new Date().getMinutes()} ${new Date().getSeconds()}`)
+          })
+  }, 17000);
 
 
     
@@ -215,7 +244,6 @@ export default function Chart(props){
       );
     } else {
     return(
-      
       <div className="chart-box" style={{boxShadow: "0px 8px 60px -10px rgba(13, 28, 39, 0.6)"}}>
         <h3 className="ml-3">Selected: {SelectedInterval}</h3>
         <ul className="pagination ml-3 mt-3">

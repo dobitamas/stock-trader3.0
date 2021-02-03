@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
+import NumberFormat from 'react-number-format';
 
 export default function OfferForm(props){
     const [StockList, setStockList] = useState([]);
@@ -10,6 +11,9 @@ export default function OfferForm(props){
     const [Quantity, setQuantity] = useState(0);
     const [CashAvailable, setCashAvailable] = useState(0);
     const [MoneyNeeded, setMoneyNeeded] = useState(0);
+    const [Variant, setVariant] = useState("");
+    const [AlertText, setAlertText] = useState("");
+    const [MoneyWorth, setMoneyWorth] = useState(0);
 
     useEffect(() => {
         setStockList(props.stockList)
@@ -21,10 +25,17 @@ export default function OfferForm(props){
     }, [Stock, props.symbol])
 
 
+
     function placeOffer() {
         axios
             .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
-            .then((resp) => console.log(resp));
+            .then((resp) => {
+                if(resp.status===200){
+                    setAlertText(resp.data);
+                    setVariant("danger");
+                    alert(resp.data)
+                }
+            });
     }
 
     function getStockDataForOffer() {
@@ -40,10 +51,11 @@ export default function OfferForm(props){
 
     useEffect(() => {
         setMoneyNeeded(Price * Quantity);
+        setMoneyWorth(Price * Quantity);
     }, [Price, Quantity])
 
     return( 
-        <Form>
+        <Form onSubmit={placeOffer}>
             <Row>
                 <Col>
                     <Form.Group>
@@ -77,7 +89,11 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired quantity</Form.Label>
+<<<<<<< HEAD
                             <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} required min={0}/>
+=======
+                            <Form.Control type="number" placeholder="Quantity" onChange={e => {if(Type!== "SELL"){setQuantity(e.target.value)}}} required/>
+>>>>>>> feature/StockListPage
                     </Form.Group>
                 </Col>
                 <Col>
@@ -87,19 +103,30 @@ export default function OfferForm(props){
                     </Form.Group>
                 </Col>
             </Row>
-            <Row>
+            <div className="mx-auto row row-eq-height">
                 <Col>
-                    <Button type="submit" onClick={placeOffer}>Submit offer</Button>
+                    <Button type="submit" >Submit offer</Button>
                 </Col>
                 <Col>
-                    {Type==="BUY"? <h3>You have:{`$ ${CashAvailable}`}</h3> : <p></p>}
-                    {Type==="SELL"? <h3>Number: {Quantity}</h3> : <p></p>}
+                    <div className="border border-primary text-center">
+                        {Type==="BUY"? <h3>You have: <br />{<NumberFormat value={CashAvailable} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>Pcs available: <br /> {<NumberFormat value={Quantity} displayType={'text'} thousandSeparator={true} suffix={"pcs"}/>}</h3> : <p></p>}
+                    </div>
                 </Col>
                 <Col>
-                    {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
+                    <div className="border border-primary text-center">
+                        {Type==="BUY"? <h3>You need: <br /> {<NumberFormat value={MoneyNeeded} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>You will get: <br /> {<NumberFormat value={MoneyWorth} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
+                    </div>
+                </Col>
+            </div>
+			<Row>
+                <Col>
+                    <Alert variant={Variant} show={AlertText? true : false}>
+                        {AlertText}
+                    </Alert>
                 </Col>
             </Row>
-			    
 			</Form>
 
     )

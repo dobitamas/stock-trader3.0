@@ -1,0 +1,30 @@
+/* FontAwesome for working BootSnippet :> */
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+#team {
+  background: #eee !important;
+}
+
+#team .card {
+  border: none;
+  background: #ffffff;
+}
+
+.frontside {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.card {
+  min-height: 10%;
+}
+
+.card .card-body .card-title {
+  color: #007b5e !important;
+}
+
+.card .card-body img {
+  width: 40%;
+  /*height: 10%;*/
+}

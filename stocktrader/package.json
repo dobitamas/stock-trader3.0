@@ -29,6 +29,7 @@
     "react-script-tag": "^1.1.2",
     "react-scripts": "4.0.1",
     "react-table": "^7.6.3",
+    "react-useinterval": "^1.0.2",
     "reactstrap": "^8.8.1",
     "web-vitals": "^0.2.4"
   },

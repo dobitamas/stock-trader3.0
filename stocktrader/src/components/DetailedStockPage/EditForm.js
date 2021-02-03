@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
+import {Form, Button, Row, Col} from 'react-bootstrap';
 import axios from "axios";
+import NumberFormat from 'react-number-format';
 
 export default function EditForm(props){
     const [Stock, setStock] = useState(props.stock);
@@ -8,7 +9,7 @@ export default function EditForm(props){
     const [Price, setPrice] = useState(props.price);
     const [Quantity, setQuantity] = useState(props.quantity);
     const [MoneyNeeded, setMoneyNeeded] = useState(0);
-    
+    const [MoneyWorth, setMoneyWorth] = useState(0);
 
     function changeType(type){
         setType(type);
@@ -24,6 +25,7 @@ export default function EditForm(props){
 
     useEffect(() => {
         setMoneyNeeded(Price * Quantity);
+        setMoneyWorth(Price * Quantity);
     }, [Price, Quantity])
 
     return(
@@ -73,11 +75,12 @@ export default function EditForm(props){
                         <Button type="submit" onClick={SendApi}>Submit change!</Button>
                     </Col>
                     <Col>
-                        {Type==="BUY"? <h3>You have:{`$ ${props.cash}`}</h3> : <p></p>}
-                        {Type==="SELL"? <h3>Number:{props.available}</h3> : <p></p>}
+                        {Type==="BUY"? <h3>You have: <br />{<NumberFormat value={props.cash} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>Number: <br /> {<NumberFormat value={props.available} displayType={'text'} thousandSeparator={true} suffix={"pcs"}/>}</h3> : <p></p>}
                     </Col>
                     <Col>
-                        {Type==="BUY"? <h3>You need: {`$ ${MoneyNeeded}`}</h3> : <p></p>}
+                        {Type==="BUY"? <h3>You need: {<NumberFormat value={MoneyNeeded} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>You will get: <br /> {<NumberFormat value={MoneyWorth} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
                     </Col>
                 </Row> 
 			</Form> 
