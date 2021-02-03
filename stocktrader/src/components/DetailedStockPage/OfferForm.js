@@ -89,7 +89,7 @@ export default function OfferForm(props){
                 <Col>
                     <Form.Group controllId="price">
                             <Form.Label>Desired quantity</Form.Label>
-                            <Form.Control type="number" placeholder="Quantity" onChange={e => setQuantity(e.target.value)} required/>
+                            <Form.Control type="number" placeholder="Quantity" onChange={e => {if(Type!== "SELL"){setQuantity(e.target.value)}}} required/>
                     </Form.Group>
                 </Col>
                 <Col>
@@ -106,7 +106,7 @@ export default function OfferForm(props){
                 <Col>
                     <div className="border border-primary text-center">
                         {Type==="BUY"? <h3>You have: <br />{<NumberFormat value={CashAvailable} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h3> : <p></p>}
-                        {Type==="SELL"? <h3>Number: <br /> {<NumberFormat value={Quantity} displayType={'text'} thousandSeparator={true} suffix={"pcs"}/>}</h3> : <p></p>}
+                        {Type==="SELL"? <h3>Pcs available: <br /> {<NumberFormat value={Quantity} displayType={'text'} thousandSeparator={true} suffix={"pcs"}/>}</h3> : <p></p>}
                     </div>
                 </Col>
                 <Col>

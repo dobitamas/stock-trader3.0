@@ -63,6 +63,7 @@ export default function StockList() {
                                         suffix={"%"}
                                     />
                                     <AreaChart series={symbol.historicalPrices} dates={symbol.dates}/>
+                                    <br />
                                     <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm"><i class="fa fa-line-chart">  DETAILS</i></a>
                                 </div>
                             </div>
