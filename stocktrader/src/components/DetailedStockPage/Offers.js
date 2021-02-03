@@ -96,7 +96,7 @@ export default function Offers(props){
                 <th>Price</th>
                 <th>Offer type</th>
                 <th>Offer date</th>
-                <th><OfferModal /></th>
+                <th><OfferModal symbol={props.symbol} type={""}/></th>
               </tr>
             </thead>
             <tbody>
