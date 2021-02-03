@@ -25,31 +25,20 @@ export default function OfferModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
  
-
-    useEffect(() => {
-        getSymbolList()
-        if (props.symbol !== ""){
-            setSymbol(props.symbol)
-            getStockDataForOffer(props.symbol)
-        } else {
-            setSymbol(SymbolList[0])
-        }
-        if (props.type !== ""){
-            setType(props.type)
-        };
-        if (props.quantity){
-            setQuantity(props.quantity)
-        };
-        if (props.price){
-            setPrice(props.price)
-        };
-        getStockDataForOffer(props.symbol)
-
-    }, []) 
-
     useEffect(() => {
         setTransactionValue(Price * Quantity);
     }, [Price, Quantity])
+
+    useEffect(() => {
+        getSymbolList()
+        setSymbol(props.symbol)
+        getStockDataForOffer(props.symbol)
+        setType(props.type)
+        setQuantity(props.quantity)
+        setPrice(props.price)
+        setTransactionValue(props.price * props.quantity)
+
+    }, []) 
 
 
     function placeOffer() {
@@ -89,7 +78,7 @@ export default function OfferModal(props) {
 
     return (
         <React.Fragment>
-            <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_=> {handleShow(); setPrice(0); setQuantity(0)}}>
+            <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={handleShow}>
                 <i className="las la-edit" />
             </button>
              <Modal show={show} onHide={handleClose} backdrop="static">
@@ -132,13 +121,13 @@ export default function OfferModal(props) {
                             <Col>
                                 <Form.Group controllId="price">
                                         <Form.Label>Desired quantity</Form.Label>
-                                        <Form.Control type="number" value={props.quantity} onChange={e => setQuantity(e.target.value)} required/>
+                                        <Form.Control type="number" value={Quantity} onChange={e => setQuantity(e.target.value)} required/>
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group controllId="price">
                                         <Form.Label>Desired price in $</Form.Label>
-                                        <Form.Control type="number" value={props.price} onChange={e => setPrice(e.target.value)} required/>
+                                        <Form.Control type="number" value={Price} onChange={e => setPrice(e.target.value)} required/>
                                 </Form.Group>
                             </Col>
                         </Row>
