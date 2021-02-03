@@ -16,7 +16,13 @@ export default function OfferForm(props){
     const [MoneyWorth, setMoneyWorth] = useState(0);
 
     useEffect(() => {
-        setStockList(props.stockList)
+        getStockList()
+        if (props.stock !== ""){
+            setStock(props.stock)
+        } else {
+            setStock(props.stockList[0])
+        }
+        
         setStock(props.stockList[0])
         if (props.type !== ""){
             setType(props.type)
@@ -44,6 +50,14 @@ export default function OfferForm(props){
             .then((resp) => {
                 setQuantity(resp.data.stockQuantity);
                 setCashAvailable(resp.data.availableCash);
+            });
+    }
+
+    function getStockList() {
+        axios
+            .get(`http://localhost:8080/stock/getStockSymbols/`)
+            .then((resp) => {
+                setStockList(resp.data);
             });
     }
 

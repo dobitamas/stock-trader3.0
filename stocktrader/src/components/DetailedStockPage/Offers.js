@@ -6,6 +6,7 @@ import {Modal, Button} from 'react-bootstrap';
 import OfferForm from './OfferForm';
 import EditForm from './EditForm';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
+import OfferModal from './OfferModal.js';
 
 
 export default function Offers(props){
@@ -16,6 +17,7 @@ export default function Offers(props){
     const [Edited, setEdited] = useState({});
     const [Available, setAvailable] = useState(0);
     const [AccData] = useContext(MainpageAccountContext);
+    const [isOfferModalVisible, setIsOfferModalVisible] = useState(false);
 
 
     const getNumberOfStocks = (symbol) => {
@@ -31,13 +33,12 @@ export default function Offers(props){
             .get(`http://localhost:8080/user/getoffers/${props.symbol}`)
             .then((resp) =>{
                 setOffers(resp.data);
-                //setCash(resp.data.cash);
             }) 
     }, [props.symbol])
 
     function DeleteOffer(id){
         axios
-            .delete(`http://localhost:8080/user/deleteoffer/${id}`);;
+            .delete(`http://localhost:8080/user/deleteoffer/${id}`);
     }
 
     function DecideOfferType(i){
@@ -54,47 +55,10 @@ export default function Offers(props){
         }
     }
 
-    function showEditModal(object){
-        
-        setEdited(object);
-        setisEditModalVisible(true);
-    }
-
-    function hideEditModal(){
-        setEdited({});
-        setisEditModalVisible(false);
-    }
-
-    function showFormModal(){
-        setisFormModalVisible(true);
-    }
-
-    function OfferModal(props){
-
-        return(
-            <Modal
-            {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Place your offer
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <OfferForm />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-        )
-    }
-
+    
     function EditModal(props){
-        console.log(Edited);
+        console.log("edited");
+        /*
         return(
             <Modal
             {...props}
@@ -115,27 +79,12 @@ export default function Offers(props){
       </Modal.Footer>
     </Modal>
         )
+        */
     }
+    
 
     return(
     <div className = "profile-card">
-        <OfferModal 
-        show={isFormModalVisible}
-        onHide={() => setisFormModalVisible(false)}
-        />
-        
-        <EditModal
-        show={isEditModalVisible}
-        onHide={() => hideEditModal}
-        />
-        <div class="table-data__tool">
-            <div class="table-data__tool-left">
-            </div>
-            <div class="table-data__tool-right">
-                <button class="au-btn au-btn-icon au-btn--green au-btn--small" onClick={showFormModal}>
-                    <i class="zmdi zmdi-plus"></i>Add item</button>
-            </div>
-        </div>
         <div className="table-responsive table-responsive-data2 mx-auto">
           <table className="table table-data2">
             <thead>
@@ -147,7 +96,7 @@ export default function Offers(props){
                 <th>Price</th>
                 <th>Offer type</th>
                 <th>Offer date</th>
-                <th></th>
+                <th><OfferModal /></th>
               </tr>
             </thead>
             <tbody>
@@ -166,7 +115,7 @@ export default function Offers(props){
                                 <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
                                 <td className="text-center">
                                     <div className="table-data-feature">
-                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => showEditModal(object)}>
+                                        <button className="item" data-toggle="tooltip" data-placement="top" title="Edit" onClick={_ => EditModal(object)}>
                                             <i className="las la-edit" />
                                         </button>
                                         <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
