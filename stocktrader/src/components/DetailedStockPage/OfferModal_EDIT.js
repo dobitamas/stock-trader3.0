@@ -37,18 +37,15 @@ export default function OfferModal(props) {
         setQuantity(props.quantity)
         setPrice(props.price)
         setTransactionValue(props.price * props.quantity)
-
     }, []) 
 
 
-    function placeOffer() {
-        console.log(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
+    function replaceOffer() {
         axios
-            .post(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8080/user/replaceoffer/${props.id}/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
-                if(resp.data === "OK"){
-                    console.log("I AM RELOADING!!!!!!")
+                if(resp.data === "Offer Replaced!"){
                     window.location.reload();
                 }
             })
@@ -83,10 +80,10 @@ export default function OfferModal(props) {
             </button>
              <Modal show={show} onHide={handleClose} backdrop="static">
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>EDIT Offer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form action="#" onSubmit={placeOffer}>
+                    <Form action="#" onSubmit={replaceOffer}>
                         <Row>
                             <Col>
                                 <Form.Group>
@@ -159,7 +156,7 @@ export default function OfferModal(props) {
                         </Row>
                         <div className="d-flex justify-content-center">
                             <Button type="submit" variant="primary" className="mt-2">
-                                Submit offer
+                                REPLACE
                             </Button>
                         </div>
                     </Form>

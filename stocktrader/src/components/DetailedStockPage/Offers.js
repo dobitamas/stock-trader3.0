@@ -7,7 +7,8 @@ import OfferForm from './OfferForm';
 import EditForm from './EditForm';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import OfferModal from './OfferModal.js';
-import OfferModalEdit from './OfferModal_EDIT.js'
+import OfferModalEdit from './OfferModal_EDIT.js';
+import OfferModalDel from './OfferModal_DEL.js';
 
 
 export default function Offers(props){
@@ -116,10 +117,8 @@ export default function Offers(props){
                                 <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
                                 <td className="text-center">
                                     <div className="table-data-feature">
-                                      <OfferModalEdit symbol={props.symbol} type={object.offerType} quantity={object.quantity} price={object.price}/>
-                                      <button className="item" data-toggle="tooltip" data-placement="top" title="Delete" onClick={_ => DeleteOffer(object.id)} type="submit">
-                                          <i className="la la-trash" />
-                                      </button>
+                                      <OfferModalEdit symbol={props.symbol} type={object.offerType} quantity={object.quantity} price={object.price} id={object.id}/>
+                                      <OfferModalDel symbol={props.symbol} type={object.offerType} quantity={object.quantity} price={object.price} id={object.id}/>
                                     </div>
                                 </td>
                             </tr>

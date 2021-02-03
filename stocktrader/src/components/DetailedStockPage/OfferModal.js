@@ -51,8 +51,7 @@ export default function OfferModal(props) {
             .post(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
-                if(resp.data === "OK"){
-                    console.log("I AM RELOADING!!!!!!")
+                if(resp.data === "Offer Accepted!"){
                     window.location.reload();
                 }
             })
@@ -87,7 +86,7 @@ export default function OfferModal(props) {
             </Button>
              <Modal show={show} onHide={handleClose} backdrop="static">
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Place offer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form action="#" onSubmit={placeOffer}>
@@ -163,7 +162,7 @@ export default function OfferModal(props) {
                         </Row>
                         <div className="d-flex justify-content-center">
                             <Button type="submit" variant="primary" className="mt-2">
-                                Submit offer
+                                SUBMIT
                             </Button>
                         </div>
                     </Form>
