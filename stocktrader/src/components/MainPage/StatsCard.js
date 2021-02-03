@@ -13,7 +13,7 @@ export default function StatsCard(props) {
                             <i className= {`${props.icon}`}></i>
                         </div>
                         <div className="col text-right">
-                            <h4>{<NumberFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={'$ '}/>}</h4>
+                            <h4>{<NumberFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={props.prefix} suffix={props.suffix} />} </h4>
                             <span className="d-block text-uppercase">{props.label}</span>
                         </div>
                     </div>

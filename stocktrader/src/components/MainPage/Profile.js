@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import './Profile.scss';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export default function Profile(props){
   const [ProfileData, setProfileData] = useState({});
@@ -37,8 +38,9 @@ export default function Profile(props){
                       </div>
                     </div>
                     <div className="profile-card-ctr">
-                      <button className="profile-card__button button--blue js-message-btn">Stocks</button>
-                      <button className="profile-card__button button--orange">Stocks</button>
+                      <Link to={"/stocks"}>
+                        <button className="profile-card__button button--blue js-message-btn">Stocks</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
