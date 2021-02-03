@@ -4,6 +4,8 @@ import DayJS from "react-dayjs";
 import dayjs from 'dayjs';
 import {Modal, Button} from 'react-bootstrap';
 import OfferForm from '../DetailedStockPage/OfferForm';
+import OfferModalBuy from './OfferModal_BUY.js';
+import OfferModalSell from './OfferModal_SELL.js';
 
 export default function StockProfile(props){
   const [StockData, setStockData] = useState({});
@@ -21,42 +23,9 @@ export default function StockProfile(props){
         })
   }, [])
 
-  function showFormModal(type){
-    setType(type);
-    setisFormModalVisible(true);
-    console.log("FORM MODAL IS VISIBLE");
-  }
-
-
-  function OfferModal(props){
-    return(
-        <Modal
-          {...props}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                Place your offer
-              </Modal.Title>
-            </Modal.Header>
-              <Modal.Body>
-                <OfferForm stockList={StockList} type={Type}/>
-              </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
-        </Modal>
-    )
-}
 
     return(
             <div>
-              <OfferModal 
-                show={isFormModalVisible}
-                onHide={() => setisFormModalVisible(false)}
-                />
                 <div className="">
                   <div className="profile-card__img">
                     <img src={StockData.logo} alt="profile card" />
@@ -88,10 +57,10 @@ export default function StockProfile(props){
                     <div className="d-flex justify-content-center container">
                       <div className="row">
                         <div className="col-sm">
-                          <button className="profile-card__button button--blue" onClick={_ => showFormModal("BUY")}>BUY</button>
+                          <OfferModalBuy symbol={props.symbol} type={""}/>
                         </div>
                         <div className="col-sm">
-                          <button className="profile-card__button button--orange" onClick={_ => showFormModal("SELL")}>SELL</button>
+                          <OfferModalSell symbol={props.symbol} type={""}/>
                         </div>
                     </div>
                       </div>
