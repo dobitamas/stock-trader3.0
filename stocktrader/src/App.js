@@ -45,7 +45,7 @@ function App() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/stocks" >
-                  <span data-feather="file" ></span>
+                  <span data-feather="file" ></span> 
                   Stocks
                 </a>
               </li>

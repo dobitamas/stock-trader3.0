@@ -51,6 +51,7 @@ export default function OfferModal(props) {
             .post(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
+                setTimeout(() => {console.log("setTimeout")}, 200)
                 if(resp.data === "Offer Accepted!"){
                     window.location.reload();
                 }
@@ -149,8 +150,8 @@ export default function OfferModal(props) {
                             <Col>
                                 <div className="d-flex border border-primary text-center align-items-center justify-content-center">
                                     {Type === "" ? <div>ENTER DATA...</div> : <p></p>}
-                                    {Type==="BUY"? <div><h8>Cash available:</h8> <br /><h5>{<NumberFormat value={CashAvailable} displayType={'text'} thousandSeparator={true} prefix={"$ "}/>}</h5></div> : <p></p>}
-                                    {Type==="SELL"? <div><h8>Stock available:</h8> <br /> <h5>{<NumberFormat value={QuantityAvailable} displayType={'text'} thousandSeparator={true} suffix={" pcs"}/>}</h5></div> : <p></p>}
+                                    {Type==="BUY"? <div><h8>Cash available:</h8> <br /><h5>{<NumberFormat value={CashAvailable} displayType={'text'} thousandSeparator={" "} decimalScale={2} prefix={"$ "}/>}</h5></div> : <p></p>}
+                                    {Type==="SELL"? <div><h8>Stock available:</h8> <br /> <h5>{<NumberFormat value={QuantityAvailable} displayType={'text'} thousandSeparator={" "} decimalScale={2} suffix={" pcs"}/>}</h5></div> : <p></p>}
                                 </div>
                             </Col>
                             <Col>
