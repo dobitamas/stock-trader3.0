@@ -57,13 +57,17 @@ export default function StocksTable(){
      
 
     useEffect(() => {
-        axios
+      getPortfolioPerformanceList()
+      setInterval(() => {
+          getPortfolioPerformanceList()
+      }, 10000)
+    }, [])
+
+    function getPortfolioPerformanceList(){
+      axios
             .get("http://localhost:8080/user/getStockPerformanceList")
             .then((resp) => setStockList(resp.data));
-
-        
-
-    }, [])
+    }
     
     return(
         <div className="m-3 border border-info">          
