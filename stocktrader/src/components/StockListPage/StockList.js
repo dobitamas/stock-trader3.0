@@ -4,16 +4,22 @@ import '../StockListPage/StockList.css';
 import StatsCard from '../MainPage/StatsCard';
 import AreaChart from './AreaChart.js';
 import { Link } from 'react-router-dom';
+import SearchField from "react-search-field";
+import InputRange from 'react-input-range';
 
 export default function StockList() {
     const [AllStockData, setAllStockData] = useState([]);
+    const [SearchWord, setSearchWord] = useState("");
+    const [OriginalStocksData, setOriginalStocksData] = useState([]);
+    const [Range, setRange] = useState({min: 0, max: 100});
 
     function getAllStockData() {
         axios
             .get(`http://localhost:8080/stock/getStockListData`)
             .then((resp) => {
                 console.log(resp.data);
-                setAllStockData(resp.data)
+                setAllStockData(resp.data);
+                setOriginalStocksData(resp.data);
             }
             );
     }
@@ -22,7 +28,19 @@ export default function StockList() {
         getAllStockData();
     }, [])
 
-    if (AllStockData.length === 0) {
+    useEffect(() => {
+        let NewStockData = [];
+        OriginalStocksData.map((stock) => {
+            if(stock.stock.name.includes(SearchWord) && stock.stock.symbol.includes(SearchWord)){
+                NewStockData.push(stock);
+            }
+        })
+
+        setAllStockData(NewStockData);
+    }, [SearchWord])
+
+    //Search miatt van hogy AllStockData hossza 0 ezért re-render-el
+    if (!AllStockData) {
         return (
             <div>
                 <img
@@ -38,6 +56,18 @@ export default function StockList() {
       } else {
     return (
         <div className="container-fluid">
+            <div className="row">
+                <div className="col">
+                    <SearchField
+                        placeholder="Search..."
+                        onChange={e => setSearchWord(e)}
+                        classNames="test-class"
+                    />
+                </div>
+                <div className="col">
+                    
+                </div>
+            </div>
             <div className="row">
             {AllStockData.map((symbol) => {
                 return( 
