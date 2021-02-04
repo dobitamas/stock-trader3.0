@@ -27,12 +27,12 @@ export default function OfferModal(props) {
  
 
     useEffect(() => {
-        getSymbolList()
         if (props.symbol !== ""){
+            getSymbolListWithSymbolProvided()
             setSymbol(props.symbol)
             getStockDataForOffer(props.symbol)
         } else {
-            setSymbol(SymbolList[0])
+            getSymbolListWithoutSymbolProvided()
         }
         if (props.type !== ""){
             setType(props.type)
@@ -68,11 +68,21 @@ export default function OfferModal(props) {
                 });
     }
 
-    function getSymbolList() {
+    function getSymbolListWithSymbolProvided() {
         axios
             .get(`http://localhost:8080/stock/getStockSymbols`)
             .then((resp) => {
                 setSymbolList(resp.data);
+            });
+    }
+
+    function getSymbolListWithoutSymbolProvided() {
+        axios
+            .get(`http://localhost:8080/stock/getStockSymbols`)
+            .then((resp) => {
+                setSymbolList(resp.data);
+                setSymbol(resp.data[0])
+                getStockDataForOffer(resp.data[0])
             });
     }
 
@@ -81,7 +91,7 @@ export default function OfferModal(props) {
 
     return (
         <React.Fragment>
-            <Button variant="primary" onClick={_=> {handleShow(); setPrice(0); setQuantity(0)}}>
+            <Button variant="success" onClick={_=> {handleShow(); setPrice(0); setQuantity(0)}}>
                 Add new offer
             </Button>
              <Modal show={show} onHide={handleClose} backdrop="static">
