@@ -43,6 +43,7 @@ export default function OfferModal(props) {
             .delete(`http://localhost:8080/user/deleteoffer/${props.id}`)
             .then((resp) => {
                 alert(resp.data)
+                setTimeout(() => {console.log("setTimeout")}, 200)
                 if(resp.data === "Offer deleted!"){
                     window.location.reload();
                 }

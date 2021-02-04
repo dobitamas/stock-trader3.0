@@ -50,6 +50,7 @@ export default function OfferModal(props) {
             .post(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
+                setTimeout(() => {console.log("setTimeout")}, 200)
                 if(resp.data === "Offer Accepted!"){
                     window.location.reload();
                 }
