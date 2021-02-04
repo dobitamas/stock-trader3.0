@@ -36,7 +36,7 @@ export default function StocksTable(){
         {
             dataField: "price",
             text: "Price",
-            sort: true,
+            sort: true, 
             formatter: (cell, row) => <NumberFormat value={row.price} displayType={'text'} thousandSeparator={" "} decimalScale={2} prefix={"$ "}/>
         },
         {
