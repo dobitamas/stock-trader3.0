@@ -7,13 +7,13 @@ export default function StatsCard(props) {
 
         <div className="">
             <Card>
-                <Card.Body >
+                <Card.Body className="py-1">
                     <div className="row d-flex align-items-center">
-                        <div className="col-xs mr-5" style={{fontSize: "2,5rem"}}>
+                        <div className="col-xs mr-2">
                             <i className= {`${props.icon}`}></i>
                         </div>
                         <div className="col text-right">
-                            <h4>{<NumberFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={props.prefix} suffix={props.suffix} />} </h4>
+                            <h4>{<NumberFormat value={props.amount} displayType={'text'} thousandSeparator={" "} decimalScale={2} prefix={props.prefix} suffix={props.suffix} />} </h4>
                             <span className="d-block text-uppercase">{props.label}</span>
                         </div>
                     </div>

@@ -26,16 +26,18 @@ export default function Portfolioperformance(props) {
         );
       } else {
         return(
-            <div className="w-100"> 
+            <div className="my-auto"> 
                 <StatsCard
-                    label={"Total value"}
-                    amount={`${Performance.portfolioTotalValue}`}
-                    icon={"las la-money-bill-wave float-left"}
+                    label={"Free cash"}
+                    amount={`${Performance.portfolioFreeCashValue}`}
+                    icon={"las la-money-bill-wave fa-3x float-left"}
+                    prefix={"$ "}
                 />
                 <StatsCard
                     label={"Total stock value"}
                     amount={`${Performance.portfolioTotalStockValue}`}
-                    icon={"las la-chart-line font-large-3 float-left"}
+                    icon={"las la-chart-line fa-3x float-left"}
+                    prefix={"$ "}
                 />
             </div>
         )

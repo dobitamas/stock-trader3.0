@@ -24,23 +24,27 @@ export default function CashStockProfit(props) {
         );
       } else {
         return(
-                <div className="m-3">
+                <div className="my-auto">
                         <StatsCard
-                        label={"Profit in stocks"}
+                        label={"Profit on stocks"}
                         amount={`$ ${Performance.currentStockProfit}`}
-                        icon={"las la-balance-scale font-large-3 float-left"}
+                        icon={"las la-coins fa-3x float-left"}
+                        prefix={"$ "}
                         /><StatsCard
-                            label={"Profit in cash"}
+                        label={"Profit rate on stocks"}
+                        amount={`${Performance.percentageCurrentStockProfit} %`} 
+                        icon={"las la-balance-scale fa-3x float-left"}
+                        suffix={" %"}
+                        /><StatsCard
+                            label={"Profit on portfolio"}
                             amount={`$ ${Performance.investedCashProfit}`}
-                            icon={"las la-piggy-bank font-large-3 float-left"} 
+                            icon={"las la-coins fa-3x float-left"}
+                            prefix={"$ "} 
                         /><StatsCard
-                            label={"Stock profit rate"}
-                            amount={`${Performance.percentageCurrentStockProfit} %`} 
-                            icon={"lar la-credit-card font-large-3 float-left"}
-                        /><StatsCard
-                            label={"Cash profit rate"}
+                            label={"Profit rate on portfolio"}
                             amount={`${Performance.percentageInvestedCashProfit} %`}
-                            icon={"las la-coins font-large-3 float-left"}
+                            icon={"las la-balance-scale fa-3x float-left"}
+                            suffix={" %"}
                         />
             </div>
 
