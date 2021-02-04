@@ -167,7 +167,7 @@ export default function Offers(props){
         <div className="m-3 border border-info" style={{textAlign: "center"}}>
           <Card> 
             <Card.Body>
-              <BootstrapTable bootstrap4 keyField="id" data={Offers} columns={Columns} bordered={false} striped={true} rowStyle={ { textAlign: 'center', margin: 'auto'} }/>
+              <BootstrapTable bootstrap4 keyField="id" data={Offers} columns={Columns} bordered={false} striped={true} rowStyle={ { fontSize: '16px' } }/>
             </Card.Body>
           </Card>
         </div>
