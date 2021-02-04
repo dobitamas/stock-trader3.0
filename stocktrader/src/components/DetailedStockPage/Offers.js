@@ -2,13 +2,16 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios";
 import './Offers.css';
 import dayjs from "dayjs";
-import {Modal, Button} from 'react-bootstrap';
+import {Modal, Button, Card} from 'react-bootstrap';
 import OfferForm from './OfferForm';
 import EditForm from './EditForm';
 import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import OfferModal from './OfferModal.js';
 import OfferModalEdit from './OfferModal_EDIT.js';
 import OfferModalDel from './OfferModal_DEL.js';
+import BootstrapTable from "react-bootstrap-table-next";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import NumberFormat from 'react-number-format'
 
 
 export default function Offers(props){
@@ -29,6 +32,54 @@ export default function Offers(props){
         }
       })
     }
+
+    const [Columns, setColumns] = useState([
+      {
+          dataField: "stock.name",
+          text: "Name",
+          sort: true,
+          formatter: (cell, row) => <a href={`/stockpage/${row.stock.symbol}`}> {cell} </a>
+  
+      },
+      {
+          dataField: "quantity",
+          text: "Quantity",
+          sort: true,
+          formatter: (cell, row) => <NumberFormat value={row.quantity} displayType={'text'} thousandSeparator={" "} decimalScale={2}/>
+      },
+      {
+          dataField: "totalValue",
+          text: "Total Value",
+          sort: true,
+          formatter: (cell, row) => <NumberFormat value={row.totalValue} displayType={'text'} thousandSeparator={" "} decimalScale={2} prefix={"$ "}/>
+      },
+      {
+          dataField: "price",
+          text: "Price",
+          sort: true,
+          formatter: (cell, row) => <NumberFormat value={row.price} displayType={'text'} thousandSeparator={" "} decimalScale={2} prefix={"$ "}/>
+      },
+      {
+          dataField: "offerType",
+          text: "Offer Type",
+          sort: true,
+          formatter: (cell, row) => returnOfferIcon(cell)
+          
+      },
+      {
+          dataField: "offerDate",
+          text: "Offer Date",
+          sort: true,
+          formatter: (cell, row) => <p>{dayjs(cell).format('YYYY MMM DD HH:mm')}</p>
+      },
+      {
+          
+          text: <OfferModal symbol={props.symbol} type={""}/>,
+          formatter: (cell, row) => <div className="d-inline-flex table-data-feature"><OfferModalEdit symbol={row.stock.symbol} type={row.offerType} quantity={row.quantity} price={row.price} id={row.id}/>
+          <OfferModalDel symbol={row.stock.symbol} type={row.offerType} quantity={row.quantity} price={row.price} id={row.id}/></div>
+      }
+      
+  ])
 
     useEffect(() => {
         axios
@@ -56,6 +107,33 @@ export default function Offers(props){
             return(<tr className="spacer"></tr>)
         }
     }
+
+    function returnOfferIcon(type){
+      if (type === "BUY"){
+          return (
+              <img
+              className = ''
+              id='loading'
+              src='/buy_cart.png'
+              alt='loading buy cart'
+              style={{width: 30}}
+              height='auto'
+            />
+          )
+      } else if (type === "SELL"){
+          return (
+              <img
+              className = "mx-auto d-block"
+              id="loading"
+              src="/sell_cart.png"
+              alt="loading sell cart"
+              style={{width: 30}}
+              height="auto"
+              display= 'block'
+            />
+          )
+      }
+  }
 
     
     function EditModal(props){
@@ -86,47 +164,12 @@ export default function Offers(props){
     
 
     return(
-    <div className = "profile-card">
-        <div className="table-responsive table-responsive-data2 mx-auto">
-          <table className="table table-data2">
-            <thead>
-              <tr style={{textAlign:"center"}}>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Total value</th>
-                <th>Price</th>
-                <th>Offer type</th>
-                <th>Offer date</th>
-                <th><OfferModal symbol={props.symbol} type={""}/></th>
-              </tr>
-            </thead>
-            <tbody>
-                {Offers.map( (object, i) => {
-                    let OfferType = DecideOfferType(i);
-                    return(
-                        <React.Fragment>
-                            {isSpacer(i)}
-                            <tr className="tr-shadow">
-                                <td className="text-center">{object.id}</td>
-                                <td className="text-center">{object.stock.name}</td>
-                                <td className="text-center">{object.quantity}</td>
-                                <td className="text-center">{`$ ${object.totalValue}`}</td>
-                                <td className="text-center">{`$ ${object.price}`}</td>
-                                <td className="text-center align-middle">{OfferType}</td>
-                                <td className="text-center">{dayjs(object.offerDate).format('YYYY MMM DD HH:mm')}</td>
-                                <td className="text-center">
-                                    <div className="table-data-feature">
-                                      <OfferModalEdit symbol={props.symbol} type={object.offerType} quantity={object.quantity} price={object.price} id={object.id}/>
-                                      <OfferModalDel symbol={props.symbol} type={object.offerType} quantity={object.quantity} price={object.price} id={object.id}/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </React.Fragment>)
-                })}
-            </tbody>
-          </table>
+        <div className="m-3 border border-info" style={{textAlign: "center"}}>
+          <Card> 
+            <Card.Body>
+              <BootstrapTable bootstrap4 keyField="id" data={Offers} columns={Columns} bordered={false} striped={true} rowStyle={ { textAlign: 'center', margin: 'auto'} }/>
+            </Card.Body>
+          </Card>
         </div>
-      </div>
       )
 }

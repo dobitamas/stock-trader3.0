@@ -90,10 +90,6 @@ export default function StocksTable(){
                 style={{width: 30}}
                 height="auto"
                 display= 'block'
-                //marginLeft= 'auto'
-                //marginRight= 'auto'
-                //marginTop='auto'
-                //marginBottom='auto'
               />
             )
         }
@@ -103,10 +99,10 @@ export default function StocksTable(){
         <div className="m-3 border border-info">
             <Card>
                 <Card.Body>
-                    <BootstrapTable bootstrap4 keyField="id" data={OfferList} columns={Columns} bordered={false} striped={true} rowStyle={ { textAalign: 'center', margin: 'auto'} }/>
+                    <BootstrapTable bootstrap4 keyField="id" data={OfferList} columns={Columns} bordered={false} striped={true} rowStyle={ { textAlign: 'center', margin: 'auto'} }/>
                 </Card.Body>
             </Card>
         </div>
       )
     
-}
+} 
