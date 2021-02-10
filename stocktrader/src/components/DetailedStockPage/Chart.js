@@ -252,7 +252,7 @@ export default function Chart(props){
           <li className="page-item"><button className="page-link" onClick={_ =>ChangeInterval("D")}>DAY</button></li>
         </ul>
         <div id="chart-candlestick">
-            <ReactApexChart options={options} series={series} type="candlestick" height={700} width={"100%"} />
+            <ReactApexChart options={options} series={series} type="candlestick" height={500} width={"100%"} />
         </div>
         <div id="chart-bar">
           <ReactApexChart options={optionsBar} series={seriesBar} type="bar" height={260} />

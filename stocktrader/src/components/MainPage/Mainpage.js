@@ -3,6 +3,7 @@ import Portfolioperformance from './Portfolioperformance';
 import CashStockProfit from './CashStockProfit';
 //import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import StocksTable from './StocksTable';
+import OffersTable from './OffersTable';
 import LineChart from './LineChart';
 import Profile from './Profile';
 import axios from 'axios';
@@ -46,11 +47,11 @@ export default function Mainpage(){
             <div>
                 <div className="row">
                     <div className="col">
-                        <div class="card m-3 border border-primary container-fluid" >
-                            <h3 style={{textAlign: "center"}}>Portfolio balance</h3>
+                        <div className="card m-3 border border-primary container-fluid" style={{maxWidth: '97%'}}>
+                            <h3 className="pt-2" style={{textAlign: "center"}}>Portfolio balance</h3>
                             <div className="row row-eq-height w-100 mx-auto">
                                 <div className="col ml-5 mr-4 card m-3 border border-info">
-                                    <Profile/>
+                                    <Profile totalPortfolioValue={PortfolioPerformance.portfolioTotalValue} investedCash={PortfolioPerformance.investedCash}/>
                                 </div>
                                 <div className="col ml-5 mr-4 card m-3 border border-info">
                                     <Portfolioperformance portfolioPerformance_Portfolioperformance={PortfolioPerformance}/>
@@ -65,15 +66,25 @@ export default function Mainpage(){
                                 
                 </div>
                 <div className="row">
-                <div className="col">
-                        <div className="card m-3 border border-primary">
-                            <h3 style={{textAlign:"center"}}>Portfolio performance</h3>
+                    <div className="col">
+                        <div className="card m-3 border border-primary" style={{maxWidth: '97%'}}>
+                            <h3 className="pt-2" style={{textAlign:"center"}}>Stock performance</h3>
                                 <div style={{textAlign: "center"}}>
                                     <StocksTable/>
                                 </div>
                         </div>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col">
+                        <div className="card m-3 border border-primary" style={{maxWidth: '97%'}}>
+                            <h3 className="pt-2" style={{textAlign:"center"}}>Offer List</h3>
+                                <div style={{textAlign: "center"}}>
+                                    <OffersTable/>
+                                </div>
+                        </div>
+                    </div>
+                </div>     
             </div>
         );
       }

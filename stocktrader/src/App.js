@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Mainpage from './components/MainPage/Mainpage';
 import Detailedstockpage from './components/DetailedStockPage/Detailedstockpage';
 import StockList from './components/StockListPage/StockList';
+import AllNews from './components/NewsPage/AllNews';
+import SpecificNews from './components/NewsPage/SpecificNews';
+
 
 function App() {
   useEffect(() => {
@@ -45,20 +48,14 @@ function App() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/stocks" >
-                  <span data-feather="file" ></span>
+                  <span data-feather="file" ></span> 
                   Stocks
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" >
-                  <span data-feather="shopping-cart"></span>
-                  Products
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" >
-                  <span data-feather="users"></span>
-                  Customers
+                <a className="nav-link" href="/news">
+                  <span data-feather="bar-chart-2"></span>
+                  News
                 </a>
               </li>
               <li className="nav-item">
@@ -67,14 +64,8 @@ function App() {
                   Reports
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" >
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
             </ul>
-
+          {/*
             <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Saved reports</span>
               <a className="d-flex align-items-center text-muted" >
@@ -107,12 +98,14 @@ function App() {
                 </a>
               </li>
             </ul>
+          */}
           </div>
         </nav>
 
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Dashboard</h1>
+            {/*
             <div className="btn-toolbar mb-2 mb-md-0">
               <div className="btn-group mr-2">
                 <button className="btn btn-sm btn-outline-secondary">Share</button>
@@ -123,6 +116,7 @@ function App() {
                 This week
               </button>
             </div>
+            */}
           </div>
           <Router>
             <div className="my-4 w-100" width="900" height="380">
@@ -134,6 +128,12 @@ function App() {
               </Route>
               <Route exact path="/stocks">
                 <StockList />
+              </Route>
+              <Route exact path="/news">
+                <AllNews />
+              </Route>
+              <Route exact path="/news/:symbol" component={Symbol}>
+                <SpecificNews symbol={Symbol} />
               </Route>
             </div>
           </Router>

@@ -20,6 +20,9 @@ export default function StockList() {
 
     useEffect(() => {
         getAllStockData();
+        setInterval(() => {
+            getAllStockData();
+        }, 10000)
     }, [])
 
     if (AllStockData.length === 0) {
@@ -53,18 +56,22 @@ export default function StockList() {
                                     <StatsCard 
                                         label={"Current price"}
                                         amount={symbol.currentPrice}
-                                        icon={"las la-money-bill-wave float-left"}
+                                        icon={"las la-money-bill-wave fa-3x float-left"}
                                         prefix={"$ "}
                                     />
                                     <StatsCard 
                                         label={"Change"}
                                         amount={symbol.priceChange}
-                                        icon={"las la-money-bill-wave float-left"}
+                                        icon={"las la-balance-scale fa-3x float-left"}
                                         suffix={"%"}
                                     />
                                     <AreaChart series={symbol.historicalPrices} dates={symbol.dates}/>
-                                    <br />
-                                    <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm"><i class="fa fa-line-chart">  DETAILS</i></a>
+                                    <div className={'d-inline-flex justify-content-center'} style={{marginTop: '10%'}}>
+                                        <a href={`http://localhost:3000/stockpage/${symbol.stock.symbol}`} class="btn btn-primary btn-sm" style={{
+                                            position: 'absolute',
+                                            bottom: 10
+                                        }}><i class="fa fa-line-chart">  DETAILS</i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
