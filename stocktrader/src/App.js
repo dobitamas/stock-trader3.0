@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Mainpage from './components/MainPage/Mainpage';
 import Detailedstockpage from './components/DetailedStockPage/Detailedstockpage';
 import StockList from './components/StockListPage/StockList';
+import AllNews from './components/NewsPage/AllNews';
+import SpecificNews from './components/NewsPage/SpecificNews';
+
 
 function App() {
   useEffect(() => {
@@ -47,6 +50,12 @@ function App() {
                 <a className="nav-link" href="/stocks" >
                   <span data-feather="file" ></span> 
                   Stocks
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/news">
+                  <span data-feather="bar-chart-2"></span>
+                  News
                 </a>
               </li>
               <li className="nav-item">
@@ -119,6 +128,12 @@ function App() {
               </Route>
               <Route exact path="/stocks">
                 <StockList />
+              </Route>
+              <Route exact path="/news">
+                <AllNews />
+              </Route>
+              <Route exact path="/news/:symbol" component={Symbol}>
+                <SpecificNews symbol={Symbol} />
               </Route>
             </div>
           </Router>
