@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MainpageAccountProvider } from './Dataproviders/AccountProvider';
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <MainpageAccountProvider>
@@ -13,6 +15,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

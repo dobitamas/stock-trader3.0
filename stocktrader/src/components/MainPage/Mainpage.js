@@ -22,7 +22,7 @@ export default function Mainpage(){
     
     function getPortfolioPerformance() {
         axios
-            .get("http://localhost:8080/user/getportfolioperformance")
+            .get("http://localhost:8762/user/getportfolioperformance")
             .then((resp) => {
                 setPortfolioPerformance(resp.data)
             }

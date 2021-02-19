@@ -19,7 +19,7 @@ export default function EditForm(props){
 
     function SendApi() {
         axios
-            .post(`http://localhost:8080/user/replaceoffer/${props.id}/${Stock}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/user/replaceoffer/${props.id}/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => console.log(resp));
     }
 

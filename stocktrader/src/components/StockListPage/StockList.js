@@ -10,7 +10,7 @@ export default function StockList() {
 
     function getAllStockData() {
         axios
-            .get(`http://localhost:8080/stock/getStockListData`)
+            .get(`http://localhost:8762/stock/getStockListData`)
             .then((resp) => {
                 console.log(resp.data);
                 setAllStockData(resp.data)

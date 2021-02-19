@@ -11,6 +11,7 @@ import AllNews from './components/NewsPage/AllNews';
 import SpecificNews from './components/NewsPage/SpecificNews';
 
 
+
 function App() {
   useEffect(() => {
     const feather = require('feather-icons');

@@ -63,7 +63,7 @@ export default function StocksTable(){
 
     useEffect(() => {
         axios
-            .get("http://localhost:8080/user/getalloffers")
+            .get("http://localhost:8762/user/getalloffers")
             .then((resp) => setOfferList(resp.data));
 
     }, []) 

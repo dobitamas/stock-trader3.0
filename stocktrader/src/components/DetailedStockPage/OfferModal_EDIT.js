@@ -42,7 +42,7 @@ export default function OfferModal(props) {
 
     function replaceOffer() {
         axios
-            .post(`http://localhost:8080/user/replaceoffer/${props.id}/${Symbol}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/user/replaceoffer/${props.id}/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
                 setTimeout(() => {console.log("setTimeout")}, 200)
@@ -55,7 +55,7 @@ export default function OfferModal(props) {
     function getStockDataForOffer(requestedSymbol) {
         console.log("updating: "+requestedSymbol)
             axios
-                .get(`http://localhost:8080/user/getStockDataForOffer/${requestedSymbol}`)
+                .get(`http://localhost:8762/user/getStockDataForOffer/${requestedSymbol}`)
                 .then((resp) => {
                     console.log(resp.data)
                     setQuantityAvailable(resp.data.stockQuantity);

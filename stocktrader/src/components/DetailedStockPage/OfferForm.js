@@ -34,7 +34,7 @@ export default function OfferForm(props){
 
     function placeOffer() {
         axios
-            .post(`http://localhost:8080/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 if(resp.status===200){
                     setAlertText(resp.data);
@@ -46,7 +46,7 @@ export default function OfferForm(props){
 
     function getStockDataForOffer() {
         axios
-            .get(`http://localhost:8080/user/getStockDataForOffer/${Stock}`)
+            .get(`http://localhost:8762/user/getStockDataForOffer/${Stock}`)
             .then((resp) => {
                 setQuantity(resp.data.stockQuantity);
                 setCashAvailable(resp.data.availableCash);
@@ -55,7 +55,7 @@ export default function OfferForm(props){
 
     function getStockList() {
         axios
-            .get(`http://localhost:8080/stock/getStockSymbols/`)
+            .get(`http://localhost:8762/stock/getStockSymbols/`)
             .then((resp) => {
                 setStockList(resp.data);
             });

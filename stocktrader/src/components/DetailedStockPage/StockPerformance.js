@@ -18,7 +18,7 @@ export default function Portfolioperformance(props) {
 
     function getStockPerformance() {
         axios
-            .get(`http://localhost:8080/user/getStockPerformance/${props.symbol}`)
+            .get(`http://localhost:8762/user/getStockPerformance/${props.symbol}`)
             .then((resp) => {
                 setStockPerformance(resp.data)
                 console.log("getStockPerfomanceList")

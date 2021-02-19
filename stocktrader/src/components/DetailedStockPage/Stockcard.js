@@ -11,13 +11,13 @@ export default function Stockcard(props){
     
     useEffect(() => {
         axios
-            .get(`https://finnhub.io/api/v1/stock/profile2?symbol=${props.symbol}&token=butt2qv48v6skju2d1tg`)
+            .get(`http://localhost:8762/stock/getstock/${props.symbol}`)
             .then((resp) =>{
                 setStockData(resp.data);
             })
 
         axios
-            .get(`http://localhost:8080/stock/getquote/${props.symbol}`)
+            .get(`http://localhost:8762/stock/getquote/${props.symbol}`)
             .then((resp) =>{
                 setQuoteData(resp.data);
             })
@@ -45,7 +45,7 @@ export default function Stockcard(props){
             </div>
             <div className="profile-card__cnt js-profile-cnt">
               <div className="profile-card__name">{StockData.name}</div>
-              <div className="profile-card__txt"><strong>{StockData.finnhubIndustry}</strong> from<strong> {StockData.country}</strong></div>
+              <div className="profile-card__txt"><strong>{StockData.industry}</strong> from<strong> {StockData.country}</strong></div>
               <div className="profile-card-loc">
                 <span className="profile-card-loc__icon">
                   <svg className="icon"><use xlinkHref="#icon-location" /></svg>
@@ -85,15 +85,15 @@ export default function Stockcard(props){
                 
               <div className="profile-card-inf">
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{StockData.currency}</div>
+                  <div className="profile-card-inf__title">{StockData.exchange}</div>
                   <div className="profile-card-inf__txt">Currency</div>
                 </div>
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{`$ ${StockData.marketCapitalization}`}</div>
+                  <div className="profile-card-inf__title">{`$ ${StockData.sharesOutstanding*QuoteData.currentPrice}`}</div>
                   <div className="profile-card-inf__txt">Capitalization</div>
                 </div>
                 <div className="profile-card-inf__item">
-                  <div className="profile-card-inf__title">{StockData.shareOutstanding}</div>
+                  <div className="profile-card-inf__title">{StockData.sharesOutstanding}</div>
                   <div className="profile-card-inf__txt">Outstanding</div>
                 </div>
                 <div className="profile-card-inf__item">

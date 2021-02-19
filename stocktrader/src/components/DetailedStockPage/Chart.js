@@ -143,7 +143,7 @@ export default function Chart(props){
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/stock/getcandle/${props.symbol}`)
+        axios.get(`http://localhost:8762/stock/getcandle/${props.symbol}`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
             setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
@@ -199,7 +199,7 @@ export default function Chart(props){
 
     useInterval(() => {
       axios
-          .get(`http://localhost:8080/stock/getcandle/${props.symbol}/1`)
+          .get(`http://localhost:8762/stock/getcandle/${props.symbol}/1`)
           .then((resp) => {
             setStockData1(resp.data.reactCandle1.reactCandleDataList)
             setVolumeData1(resp.data.reactCandle1.reactVolumeDataList)
@@ -214,7 +214,7 @@ export default function Chart(props){
 
   useInterval(() => {     
       axios
-          .get(`http://localhost:8080/stock/getcandle/${props.symbol}/5`)
+          .get(`http://localhost:8762/stock/getcandle/${props.symbol}/5`)
           .then((resp) => {
             setStockData5(resp.data.reactCandle5.reactCandleDataList)
             setVolumeData5(resp.data.reactCandle5.reactVolumeDataList)

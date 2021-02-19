@@ -46,9 +46,9 @@ export default function OfferModal(props) {
 
 
     function placeOffer() {
-        console.log(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
+        console.log(`http://localhost:8762/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
         axios
-            .post(`http://localhost:8080/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
             .then((resp) => {
                 alert(resp.data)
                 setTimeout(() => {console.log("setTimeout")}, 200)
@@ -61,7 +61,7 @@ export default function OfferModal(props) {
     function getStockDataForOffer(requestedSymbol) {
         console.log("updating: "+requestedSymbol)
             axios
-                .get(`http://localhost:8080/user/getStockDataForOffer/${requestedSymbol}`)
+                .get(`http://localhost:8762/user/getStockDataForOffer/${requestedSymbol}`)
                 .then((resp) => {
                     console.log(resp.data)
                     setQuantityAvailable(resp.data.stockQuantity);
@@ -71,7 +71,7 @@ export default function OfferModal(props) {
 
     function getSymbolListWithSymbolProvided() {
         axios
-            .get(`http://localhost:8080/stock/getStockSymbols`)
+            .get(`http://localhost:8762/stock/getStockSymbols`)
             .then((resp) => {
                 setSymbolList(resp.data);
             });
@@ -79,7 +79,7 @@ export default function OfferModal(props) {
 
     function getSymbolListWithoutSymbolProvided() {
         axios
-            .get(`http://localhost:8080/stock/getStockSymbols`)
+            .get(`http://localhost:8762/stock/getStockSymbols`)
             .then((resp) => {
                 setSymbolList(resp.data);
                 setSymbol(resp.data[0])

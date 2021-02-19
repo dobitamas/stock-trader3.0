@@ -16,7 +16,7 @@ export default function StockProfile(props){
 
   useEffect(() => {
     axios 
-      .get(`http://localhost:8080/stock/getstock/${props.symbol}`)
+      .get(`http://localhost:8762/stock/getstock/${props.symbol}`)
       .then((resp) =>{
           setStockData(resp.data)
           setStockList(StockList => [...StockList, props.symbol])

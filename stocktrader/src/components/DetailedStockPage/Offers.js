@@ -83,7 +83,7 @@ export default function Offers(props){
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/user/getoffers/${props.symbol}`)
+            .get(`http://localhost:8762/user/getoffers/${props.symbol}`)
             .then((resp) =>{
                 setOffers(resp.data);
             }) 
@@ -91,7 +91,7 @@ export default function Offers(props){
 
     function DeleteOffer(id){
         axios
-            .delete(`http://localhost:8080/user/deleteoffer/${id}`);
+            .delete(`http://localhost:8762/user/deleteoffer/${id}`);
     }
 
     function DecideOfferType(i){

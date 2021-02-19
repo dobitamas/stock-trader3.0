@@ -9,7 +9,7 @@ export default function Profile(props){
 
   useEffect(() => {
     axios 
-      .get(`http://localhost:8080/user/getprofilecardinfo`)
+      .get(`http://localhost:8762/user/getprofilecardinfo`)
       .then((resp) => setProfileData(resp.data));
   }, [])
 

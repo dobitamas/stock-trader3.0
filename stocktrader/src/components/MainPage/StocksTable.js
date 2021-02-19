@@ -65,7 +65,7 @@ export default function StocksTable(){
 
     function getPortfolioPerformanceList(){
       axios
-            .get("http://localhost:8080/user/getStockPerformanceList")
+            .get("http://localhost:8762/user/getStockPerformanceList")
             .then((resp) => setStockList(resp.data));
     }
     
