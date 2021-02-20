@@ -65,7 +65,7 @@ export default function OfferModal(props) {
 
     function getSymbolList() {
         axios
-            .get(`http://localhost:8080/stock/getStockSymbols`)
+            .get(`http://localhost:8762/stock/getStockSymbols`)
             .then((resp) => {
                 setSymbolList(resp.data);
             });
