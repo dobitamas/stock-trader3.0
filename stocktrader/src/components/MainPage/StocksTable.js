@@ -4,10 +4,12 @@ import axios from 'axios';
 import NumberFormat from 'react-number-format'
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import { useCookies } from "react-cookie";
 
 
 export default function StocksTable(){
     const [StockList, setStockList] = useState([]);
+    const [cookies, setCookie, removeCookie] = useCookies();
     const [Columns, setColumns] = useState([
       {
         dataField: "stock.name",
@@ -65,9 +67,13 @@ export default function StocksTable(){
 
     function getPortfolioPerformanceList(){
       axios
-            .get("http://localhost:8762/user/getStockPerformanceList")
-            .then((resp) => setStockList(resp.data));
-    }
+            .get("http://localhost:8762/auth/user/getstockperformancelist", {
+              headers: { Authorization: `Bearer ${cookies["auth"]}` }
+          })
+            .then((resp) => {
+              setStockList(resp.data.stockPerformancesList)
+            });
+    } 
     
     return(
         <div className="m-3 border border-info">          

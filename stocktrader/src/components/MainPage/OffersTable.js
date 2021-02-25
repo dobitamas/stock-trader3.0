@@ -8,11 +8,12 @@ import OfferModalEdit from '../DetailedStockPage/OfferModal_EDIT.js'
 import OfferModalDel from '../DetailedStockPage/OfferModal_DEL.js'
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-
+import { useCookies } from "react-cookie";
 
 
 export default function StocksTable(){
     const [OfferList, setOfferList] = useState([]);
+    const [cookies, setCookie, removeCookie] = useCookies();
     const [Columns, setColumns] = useState([
         {
             dataField: "stock.name",
@@ -63,8 +64,12 @@ export default function StocksTable(){
 
     useEffect(() => {
         axios
-            .get("http://localhost:8762/user/getalloffers")
-            .then((resp) => setOfferList(resp.data));
+            .get("http://localhost:8762/auth/user/getalloffers", {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
+            .then((resp) => {
+                setOfferList(resp.data.offers)
+            });
 
     }, []) 
 

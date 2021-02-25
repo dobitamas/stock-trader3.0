@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { MainpageAccountProvider } from './Dataproviders/AccountProvider';
 import {LoggedInContextProvider} from './context/LoggedInContext';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoggedInContextProvider>
-      <MainpageAccountProvider>
+    <LoggedInContextProvider> 
         <App />
-      </MainpageAccountProvider>
     </LoggedInContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

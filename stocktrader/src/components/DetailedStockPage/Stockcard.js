@@ -1,13 +1,15 @@
 import React,{useState, useEffect, useContext} from 'react';
 import './Stockcard.scss';
 import axios from "axios";
-import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
+import { useCookies } from "react-cookie";
+
 
 export default function Stockcard(props){
     const [StockData,setStockData] = useState({});
     const [QuoteData, setQuoteData] = useState({});
     const [StockAmount, setStockAmount] = useState(0);
-    const [AccData] = useContext(MainpageAccountContext);
+    const [cookies, setCookie, removeCookie] = useCookies();
+    const [StockPerformanceList, setStockPerformanceList] = useState([]);
     
     useEffect(() => {
         axios
@@ -22,12 +24,20 @@ export default function Stockcard(props){
                 setQuoteData(resp.data);
             })
 
+        axios
+            .get(`http://localhost:8762/auth/user/getstockperformancelist`, {
+              headers: { Authorization: `Bearer ${cookies["auth"]}` }
+          })
+            .then((resp) =>{
+              setStockPerformanceList(resp.data.stockPerformancesList);
+            })
+
         GetStockAmount();
     }, [props.symbol])
 
     function GetStockAmount(){
       console.log("Stock amount")
-      AccData.stockPerformanceList.map((obj) => {
+      StockPerformanceList.map((obj) => {
         if(obj.stock.symbol === props.symbol){
           console.log(obj.stockTotalAmount);
           setStockAmount(obj.stockTotalAmount);

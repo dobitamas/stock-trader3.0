@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
+import { useCookies } from "react-cookie";
 
 export default function OfferForm(props){
     const [StockList, setStockList] = useState([]);
@@ -14,6 +15,7 @@ export default function OfferForm(props){
     const [Variant, setVariant] = useState("");
     const [AlertText, setAlertText] = useState("");
     const [MoneyWorth, setMoneyWorth] = useState(0);
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     useEffect(() => {
         getStockList()
@@ -34,7 +36,9 @@ export default function OfferForm(props){
 
     function placeOffer() {
         axios
-            .post(`http://localhost:8762/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/auth/user/placeoffer/${Stock}/${Type}/${Quantity}/${Price}`,null, {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 if(resp.status===200){
                     setAlertText(resp.data);
@@ -46,7 +50,9 @@ export default function OfferForm(props){
 
     function getStockDataForOffer() {
         axios
-            .get(`http://localhost:8762/user/getStockDataForOffer/${Stock}`)
+            .get(`http://localhost:8762/auth/user/getstockdataforoffer/${Stock}`, {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 setQuantity(resp.data.stockQuantity);
                 setCashAvailable(resp.data.availableCash);

@@ -5,13 +5,13 @@ import dayjs from "dayjs";
 import {Modal, Button, Card} from 'react-bootstrap';
 import OfferForm from './OfferForm';
 import EditForm from './EditForm';
-import {MainpageAccountContext} from '../../Dataproviders/AccountProvider';
 import OfferModal from './OfferModal.js';
 import OfferModalEdit from './OfferModal_EDIT.js';
 import OfferModalDel from './OfferModal_DEL.js';
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import NumberFormat from 'react-number-format'
+import { useCookies } from "react-cookie";
 
 
 export default function Offers(props){
@@ -21,12 +21,14 @@ export default function Offers(props){
     const [Cash, setCash] = useState(0);
     const [Edited, setEdited] = useState({});
     const [Available, setAvailable] = useState(0);
-    const [AccData] = useContext(MainpageAccountContext);
+    const [StockPerformanceList, setStockPerformanceList] = useState([]);
     const [isOfferModalVisible, setIsOfferModalVisible] = useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies();
+    
 
 
     const getNumberOfStocks = (symbol) => {
-      AccData.stockPerformanceList.map((object) => {
+      StockPerformanceList.map((object) => {
         if(object.stock.symbol === symbol){
           setAvailable(object.stockTotalAmount);
         }
@@ -83,10 +85,20 @@ export default function Offers(props){
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8762/user/getoffers/${props.symbol}`)
+            .get(`http://localhost:8762/auth/user/getoffers/${props.symbol}`, {
+              headers: { Authorization: `Bearer ${cookies["auth"]}` }
+          })
             .then((resp) =>{
-                setOffers(resp.data);
-            }) 
+                setOffers(resp.data.offers);
+            })
+            
+        axios
+            .get(`http://localhost:8762/auth/user/getstockperformancelist`, {
+              headers: { Authorization: `Bearer ${cookies["auth"]}` }
+          })
+            .then((resp) =>{
+              setStockPerformanceList(resp.data.stockPerformancesList);
+            })
     }, [props.symbol])
 
     function DeleteOffer(id){

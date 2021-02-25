@@ -3,13 +3,17 @@ import './Profile.scss';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format'
+import { useCookies } from "react-cookie";
 
 export default function Profile(props){
   const [ProfileData, setProfileData] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   useEffect(() => {
     axios 
-      .get(`http://localhost:8762/auth/user/getprofilecardinfo`)
+      .get(`http://localhost:8762/auth/user/getprofilecardinfo`, {
+        headers: { Authorization: `Bearer ${cookies["auth"]}` }
+    })
       .then((resp) => setProfileData(resp.data));
   }, [])
 

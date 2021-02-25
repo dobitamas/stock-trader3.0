@@ -4,12 +4,13 @@ import Button from 'react-bootstrap/Button'
 import {Form, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
-
+import { useCookies } from "react-cookie";
 
 export default function OfferModal(props) {
     const [show, setShow] = useState(false);
     const [Symbol, setSymbol] = useState("");
     const [Type, setType] = useState("");
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     //SELL
     const [QuantityAvailable, setQuantityAvailable] = useState(0);
@@ -27,20 +28,24 @@ export default function OfferModal(props) {
     
 
     useEffect(() => {
-        setSymbol(props.symbol)
-        getStockDataForOffer(props.symbol)
-        setType(props.type)
-        setQuantity(props.quantity)
-        setPrice(props.price)
-        setTransactionValue(props.price * props.quantity)
-        //setId(props.id)
 
-    }, []) 
+            console.log("SHOW IS TRUE", show)
+            setSymbol(props.symbol)
+            getStockDataForOffer(props.symbol)
+            setType(props.type)
+            setQuantity(props.quantity)
+            setPrice(props.price)
+            setTransactionValue(props.price * props.quantity)
+
+
+    }, [])  
 
 
     function deleteOffer() {
         axios
-            .delete(`http://localhost:8762/user/deleteoffer/${props.id}`)
+            .delete(`http://localhost:8762/auth/user/deleteoffer/${props.id}`, {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 alert(resp.data)
                 setTimeout(() => {console.log("setTimeout")}, 200)
@@ -53,7 +58,9 @@ export default function OfferModal(props) {
     function getStockDataForOffer(requestedSymbol) {
         console.log("updating: "+requestedSymbol)
             axios
-                .get(`http://localhost:8762/user/getStockDataForOffer/${requestedSymbol}`)
+                .get(`http://localhost:8762/auth/user/getstockdataforoffer/${requestedSymbol}`, {
+                    headers: { Authorization: `Bearer ${cookies["auth"]}` }
+                })
                 .then((resp) => {
                     console.log(resp.data)
                     setQuantityAvailable(resp.data.stockQuantity);

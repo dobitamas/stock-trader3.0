@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import {Form, Row, Col, Alert} from 'react-bootstrap';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
+import { useCookies } from "react-cookie";
 
 
 export default function OfferModal(props) {
@@ -11,6 +12,7 @@ export default function OfferModal(props) {
     const [SymbolList, setSymbolList] = useState([]);
     const [Symbol, setSymbol] = useState("");
     const [Type, setType] = useState("");
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     //SELL
     const [QuantityAvailable, setQuantityAvailable] = useState(0);
@@ -27,18 +29,20 @@ export default function OfferModal(props) {
  
 
     useEffect(() => {
-        if (props.symbol !== ""){
-            getSymbolListWithSymbolProvided()
-            setSymbol(props.symbol)
-            getStockDataForOffer(props.symbol)
-        } else {
-            getSymbolListWithoutSymbolProvided()
-        }
-        if (props.type !== ""){
-            setType(props.type)
-        };
+            if (props.symbol !== ""){
+                getSymbolListWithSymbolProvided()
+                setSymbol(props.symbol)
+                getStockDataForOffer(props.symbol)
+            } else {
+                getSymbolListWithoutSymbolProvided()
+            }
+            if (props.type !== ""){
+                setType(props.type)
+            };
+        
+        
 
-    }, []) 
+    }, [])
 
     useEffect(() => {
         setTransactionValue(Price * Quantity);
@@ -46,9 +50,10 @@ export default function OfferModal(props) {
 
 
     function placeOffer() {
-        console.log(`http://localhost:8762/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
         axios
-            .post(`http://localhost:8762/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`)
+            .post(`http://localhost:8762/auth/user/placeoffer/${Symbol}/${Type}/${Quantity}/${Price}`,null, {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 alert(resp.data)
                 setTimeout(() => {console.log("setTimeout")}, 200)
@@ -61,7 +66,9 @@ export default function OfferModal(props) {
     function getStockDataForOffer(requestedSymbol) {
         console.log("updating: "+requestedSymbol)
             axios
-                .get(`http://localhost:8762/user/getStockDataForOffer/${requestedSymbol}`)
+                .get(`http://localhost:8762/auth/user/getstockdataforoffer/${requestedSymbol}`, {
+                    headers: { Authorization: `Bearer ${cookies["auth"]}` }
+                })
                 .then((resp) => {
                     console.log(resp.data)
                     setQuantityAvailable(resp.data.stockQuantity);
