@@ -7,10 +7,12 @@ import OffersTable from './OffersTable';
 import LineChart from './LineChart';
 import Profile from './Profile';
 import axios from 'axios';
+import { useCookies } from "react-cookie";
 
 
 export default function Mainpage(){
     const [PortfolioPerformance, setPortfolioPerformance] = useState({});
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     useEffect(() => {
         getPortfolioPerformance()
@@ -22,7 +24,9 @@ export default function Mainpage(){
     
     function getPortfolioPerformance() {
         axios
-            .get("http://localhost:8762/user/getportfolioperformance")
+            .get("http://localhost:8762/auth/user/getportfolioperformance", {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 setPortfolioPerformance(resp.data)
             }

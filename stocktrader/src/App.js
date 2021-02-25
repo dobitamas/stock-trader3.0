@@ -9,6 +9,7 @@ import Detailedstockpage from './components/DetailedStockPage/Detailedstockpage'
 import StockList from './components/StockListPage/StockList';
 import AllNews from './components/NewsPage/AllNews';
 import SpecificNews from './components/NewsPage/SpecificNews';
+import LoginOrRegister from './components/LoginRegister/LoginOrRegister'
 
 
 
@@ -60,9 +61,9 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" >
+                <a className="nav-link" href="/login-register">
                   <span data-feather="bar-chart-2"></span>
-                  Reports
+                  Login/Register
                 </a>
               </li>
             </ul>
@@ -135,6 +136,9 @@ function App() {
               </Route>
               <Route exact path="/news/:symbol" component={Symbol}>
                 <SpecificNews symbol={Symbol} />
+              </Route>
+              <Route exact path="/login-register">
+                <LoginOrRegister />
               </Route>
             </div>
           </Router>
