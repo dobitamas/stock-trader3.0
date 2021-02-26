@@ -15,16 +15,17 @@ export default function Login(props) {
     Axios.post("http://localhost:8762/auth/signin", {
       username: username,
       password: password,
-    })
+    }) 
       .then((data) => {
         /*removeCookies();
         document.cookie = `Authorization=${data.data.token}`;*/
         console.log(data.data)
         setCookie("auth", data.data.token);
-        localStorage.clear();
-        window.localStorage.setItem("username", username);
-        window.localStorage.setItem("roles", data.data.roles);
-        setIsLoggedIn(true);
+        setCookie("roles", data.data.role);
+        setCookie("username", username);
+        //window.localStorage.setItem("username", username);
+        //window.localStorage.setItem("roles", data.data.roles);
+        //setIsLoggedIn(true);
         //props.history.push("/");
       })
       .catch((e) => {

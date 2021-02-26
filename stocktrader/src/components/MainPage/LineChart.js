@@ -9,6 +9,8 @@ export default function LineChart(props){
 
     useEffect(() => {
         setPerformance(props.portfolioPerformance_LineChart)
+        console.log("linechart:")
+        console.log(props.portfolioPerformance_LineChart)
     }, [props.portfolioPerformance_LineChart])
 
     if (Performance === null) {
@@ -32,10 +34,10 @@ export default function LineChart(props){
                         <h3 style={{textAlign:"center"}}>Cash/Stock rate</h3>
                     </Card.Header>
                     <Card.Body>
-                    <div className="progress" style={{height:"2rem"}}>
-                        <div className="progress-bar bg-success" style={{width: `${Performance.percentageCashValue}%`}} role="progressbar" aria-valuenow={Performance.percentageCashValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageCashValue}</div>
-                        <div className="progress-bar" style={{width: `${Performance.percentageStockValue}%`}} role="progressbar" aria-valuenow={Performance.percentageStockValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageStockValue}</div>
-                    </div>  
+                        <div className="progress" style={{height:"2rem"}}>
+                            <div className="progress-bar bg-success" style={{width: `${Performance.percentageCashValue}%`}} role="progressbar" aria-valuenow={Performance.percentageCashValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageCashValue}</div>
+                            <div className="progress-bar" style={{width: `${Performance.percentageStockValue}%`}} role="progressbar" aria-valuenow={Performance.percentageStockValue} aria-valuemin="0" aria-valuemax="100">{Performance.percentageStockValue}</div>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>

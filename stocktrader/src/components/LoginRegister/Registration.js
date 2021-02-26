@@ -10,6 +10,8 @@ function Registration(props) {
   const [email, setEmail] = useState("");
   const [firstPassword, setFirstPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
+  const [nickName, setNickName] = useState("");
+  const [profilePic, setprofilePic] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
   const [cookies, setCookie] = useCookies(["auth"]);
 
@@ -17,35 +19,30 @@ function Registration(props) {
     if (firstPassword !== secondPassword) {
       alert("Passwords are not equal!");
     } else {
-      Axios.post("http://localhost:8762/auth/registration", {
+      Axios.post("http://localhost:8762/registertrader", {
         username: userName,
-        email: email,
         password: firstPassword,
+        nickName: nickName,
+        profilePic_: profilePic,
+        e_mail: email,
       })
         .then((data) => {
           /*removeCookies();
           document.cookie = `Authorization=${data.data.token}`;*/
-          setCookie("auth", data.data.token, { path: "/" });
-          localStorage.clear();
-          window.localStorage.setItem("username", userName);
-          window.localStorage.setItem("roles", data.data.roles);
+          
           setIsLoggedIn(true);
-          props.history.push("/");
+          console.log("DATA: ", data);
+          if(data.data === true){
+            alert("Successfully registered!")
+          } else {
+            alert("Username and/or email address taken!");
+          }
         })
         .catch((e) => {
           alert("Username and/or email address taken!");
         });
     }
   };
-
-  function removeCookies() {
-    var res = document.cookie;
-    var multiple = res.split(";");
-    for (var i = 0; i < multiple.length; i++) {
-      var key = multiple[i].split("=");
-      document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-    }
-  }
 
   const togglePasswordVisibility = () => {
     let passwordInput = document.getElementById("password");
@@ -109,7 +106,26 @@ function Registration(props) {
               required
               onChange={(e) => setSecondPassword(e.target.value)}
             />
-
+            <input
+              className="nickname"
+              id="nickname"
+              type="text"
+              name="nickname"
+              title="nickname"
+              placeholder="Nickname"
+              required
+              onChange={(e) => setNickName(e.target.value)}
+            />
+            <input
+              className="profilepic"
+              id="profilepic"
+              type="text"
+              name="profilepic"
+              title="profilepic"
+              placeholder="Profilepic"
+              required
+              onChange={(e) => setprofilePic(e.target.value)}
+            />
             <div class="level options">
               <div class="checkbox level-left">
                 <input

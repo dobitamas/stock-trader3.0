@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
 import {Helmet} from 'react-helmet';
 /*import '../node_modules/bootstrap/dist/css/bootstrap.css';*/
 import '../src/scss/custom.scss';
@@ -10,14 +10,24 @@ import StockList from './components/StockListPage/StockList';
 import AllNews from './components/NewsPage/AllNews';
 import SpecificNews from './components/NewsPage/SpecificNews';
 import LoginOrRegister from './components/LoginRegister/LoginOrRegister'
-
+import LoggedInContext from './context/LoggedInContext.js';
+import { useCookies } from "react-cookie";
 
 
 function App() {
+  //const [IsLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
+  const [cookies, setCookie, removeCookie] = useCookies();
+
   useEffect(() => {
     const feather = require('feather-icons');
     feather.replace();
 }, [])
+
+  function removeCookies() {
+    removeCookie("auth");
+    removeCookie("username");
+    removeCookie("roles");
+  }
 
   return (
     <div className="App" style={{backgroundColor: "#f4f7fa"}}>
@@ -31,9 +41,9 @@ function App() {
       <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Stock Trader</a>
       <input className="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search"/>
       <ul className="navbar-nav px-3">
+        {cookies["username"]? <div><a className="nav-link" style={{display: 'inline-block'}}>{`Hello ${cookies["username"]}`}</a> <a className="nav-link" onClick={_ => removeCookies()} style={{display: 'inline-block'}}>Logout</a> </div>: <a className="nav-link">GUEST</a> }
         <li className="nav-item text-nowrap">
-          <a className="nav-link" >Sign in</a>
-        </li>
+        </li> 
       </ul>
     </nav>
 
@@ -45,13 +55,13 @@ function App() {
               <li className="nav-item">
                 <a className="nav-link active" href="/">
                   <span data-feather="home"></span>
-                  Mainpage <span className="sr-only">(current)</span>
+                  StockList
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/stocks" >
+                <a className="nav-link" href="/dashboard" >
                   <span data-feather="file" ></span> 
-                  Stocks
+                  Dashboard
                 </a>
               </li>
               <li className="nav-item">
@@ -123,13 +133,13 @@ function App() {
           <Router>
             <div className="my-4 w-100" width="900" height="380">
               <Route exact path="/">
-                <Mainpage />
+                <StockList />
               </Route>
               <Route exact path="/stockpage/:symbol" component={Symbol}>
                 <Detailedstockpage symbol={Symbol} />
               </Route>
-              <Route exact path="/stocks">
-                <StockList />
+              <Route exact path="/dashboard">
+                <Mainpage />
               </Route>
               <Route exact path="/news">
                 <AllNews />

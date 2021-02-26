@@ -11,3 +11,5 @@ export const LoggedInContextProvider = (props) => {
     </LoggedInContext.Provider>
   );
 };
+
+export default LoggedInContext;

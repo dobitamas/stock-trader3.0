@@ -3,9 +3,12 @@ import React,{useState, useEffect} from 'react';
 import StockStatsCard from './StockStatsCard';
 import axios from 'axios';
 import NumberFormat from 'react-number-format'
+import { useCookies } from "react-cookie";
+
 
 export default function Portfolioperformance(props) {
     const [StockPerformance, setStockPerformance] = useState({});
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     useEffect(() => {
         getStockPerformance();
@@ -18,7 +21,9 @@ export default function Portfolioperformance(props) {
 
     function getStockPerformance() {
         axios
-            .get(`http://localhost:8762/user/getStockPerformance/${props.symbol}`)
+            .get(`http://localhost:8762/auth/user/getstockperformance/${props.symbol}`, {
+                headers: { Authorization: `Bearer ${cookies["auth"]}` }
+            })
             .then((resp) => {
                 setStockPerformance(resp.data)
                 console.log("getStockPerfomanceList")
